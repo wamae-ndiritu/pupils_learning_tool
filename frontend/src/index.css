@@ -40,6 +40,15 @@ input {
   color: blue;
   padding: 0px 8px;
 }
+.link-b {
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+  padding: 0px 8px;
+}
+
+li.link-b:hover {
+  cursor: pointer;
+}
 span.link:hover {
   cursor: pointer;
 }

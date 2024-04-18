@@ -6,30 +6,24 @@ function Admin() {
     <>
       <button onClick={() => navigate("/admin/students")}>students</button>
 
-      <section>
+      <br />
+      <section className="card ass">
         <h3>my subjects</h3>
-        <details>
-          <summary>Kiswahili</summary>
-          <h5>Topics</h5>
+        <div>
+          <h5>kiswahili</h5>
           <ol>
-            <li>assignment1</li>
+            <li className="link-b" onClick={() => navigate("/admin/kiswahili")}>
+              grade4
+            </li>
+            <li className="link-b" onClick={() => navigate("/admin/math")}>
+              grade6
+            </li>
           </ol>
-          <button>delete Topic</button>
-        </details>
-        <button>add Topic</button>
+          <button className="btn-cancel">delete subject</button>
+        </div>
+        <button className="btn">add subject</button>
       </section>
-      <section>
-        <h3>my assignments</h3>
-        <details>
-          <summary>nomino</summary>
-          <h5>assignments</h5>
-          <ol>
-            <li>assignment1</li>
-          </ol>
-          <button>delete assignment</button>
-        </details>
-        <button>add assignment</button>
-      </section>
+      <br />
     </>
   );
 }

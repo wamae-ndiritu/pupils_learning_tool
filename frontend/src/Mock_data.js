@@ -21,7 +21,7 @@ export const students = {
     { name: "john gige", subject: "kiswahili", score: 20 },
   ],
   Grade5: [{ name: "john gige", subject: "kiswahili", score: 20 }],
-  Grade6: [{ name: "john gige", subject: "kiswahili", score: 20 }],
-  Grade7: [{ name: "john gige", subject: "kiswahili", score: 20 }],
-  Grade8: [{ name: "john gige", subject: "kiswahili", score: 20 }],
+  Grade6: [{ name: "john gige", subject: "kiswahili", score: 22 }],
+  Grade7: [{ name: "john gige", subject: "kiswahili", score: 23 }],
+  Grade8: [{ name: "john gige", subject: "kiswahili", score: 24 }],
 };
