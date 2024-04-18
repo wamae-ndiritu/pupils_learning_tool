@@ -25,3 +25,6 @@ export const students = {
   Grade7: [{ name: "john gige", subject: "kiswahili", score: 23 }],
   Grade8: [{ name: "john gige", subject: "kiswahili", score: 24 }],
 };
+let num = 0;
+Object.keys(students).map((i) => (num += Object.values(students[i]).length));
+export const no_student = num;

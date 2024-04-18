@@ -8,11 +8,13 @@ function Navbar(params) {
         <img src="" alt="page icon" />
         <p>pupil learning tool</p>
       </figure>
-
-      <div className="link-b" onClick={() => Navigate("/student")}>
-        student
+      <div className="link-b" onClick={() => Navigate("/admin")}>
+        admin
       </div>
 
+      <div className="link-b" onClick={() => Navigate("/admin/students")}>
+        student list
+      </div>
       <div className="link-b" onClick={() => Navigate("/admin/students")}>
         logout
       </div>

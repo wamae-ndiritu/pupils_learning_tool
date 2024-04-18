@@ -2,10 +2,13 @@
   padding: 4px 0px;
   border: 0.5px solid;
   border-radius: 10px;
-  margin: 0px 10px;
+  margin: 0px 4px;
   text-align: center;
   background-color: rgb(227, 227, 236);
   text-transform: capitalize;
+}
+.card-h {
+  height: 100vh;
 }
 .students {
   text-align: unset;
@@ -46,7 +49,7 @@ input {
   padding: 0px 8px;
 }
 
-li.link-b:hover {
+.link-b:hover {
   cursor: pointer;
 }
 span.link:hover {
@@ -69,6 +72,28 @@ span.link:hover {
   padding: 4px 8px;
   background-color: rgb(247, 122, 122);
 }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+.grid2 {
+  grid-template-columns: auto auto;
+}
+.inlinegrid {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.inlinegrid2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.inlinegrid > div {
+  line-height: 50px;
+  font-size: 20px;
+}
+
 /*Admin page*/
 table,
 th,

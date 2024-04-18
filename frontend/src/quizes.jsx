@@ -53,7 +53,7 @@ function Quize() {
           bill
         </li>
       </ol>
-      {/*<button className="btn finish">finish</button>*/}
+      <button className="btn finish">finish</button>
     </>
   );
 }

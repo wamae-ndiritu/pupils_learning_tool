@@ -11,7 +11,7 @@ import Ass from "./admin/assignment";
 function App() {
   return (
     <>
-      <Navbar />
+      {/*  <Navbar /> */}
       <Routes>
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/:sbj" element={<Ass />} />
