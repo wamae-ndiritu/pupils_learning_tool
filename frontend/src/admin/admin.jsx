@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import Navbar from "./nav";
-import { no_student, students, subject } from "../Mock_data";
+import { admin_data, no_student, students, subject } from "../Mock_data";
 
 function Admin() {
   const navigate = useNavigate();
+
   return (
     <div className="grid">
       <Navbar />
@@ -26,21 +27,24 @@ function Admin() {
         <br />
         <section className="card ass">
           <h3>my subjects</h3>
-          <div>
-            <h5>kiswahili</h5>
-            <ol>
-              <li
-                className="link-b"
-                onClick={() => navigate("/admin/kiswahili")}
-              >
-                grade4
-              </li>
-              <li className="link-b" onClick={() => navigate("/admin/math")}>
-                grade6
-              </li>
-            </ol>
-            <button className="btn-cancel">delete subject</button>
-          </div>
+          {Object.keys(admin_data).map((subject) => (
+            <div>
+              <h5>{subject}</h5>
+              <ol>
+                {Object.keys(admin_data[`${subject}`]).map((grade) => (
+                  <li
+                    className="link-b"
+                    onClick={() => navigate(`/admin/${subject}/${grade}`)}
+                  >
+                    {grade}
+                  </li>
+                ))}
+              </ol>
+
+              <button className="btn-cancel">delete subject</button>
+            </div>
+          ))}
+
           <button className="btn">add subject</button>
         </section>
       </main>

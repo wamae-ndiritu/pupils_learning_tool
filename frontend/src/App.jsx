@@ -3,19 +3,18 @@ import Sign_up from "./signup";
 import Sign_in from "./Login";
 import Student from "./student_page";
 import Topic from "./subject";
-import Quize from "./quizes";
-import Navbar from "./nav";
+import Quize from "./admin/add_quiz";
 import Admin from "./admin/admin";
 import Stats from "./admin/Stats";
 import Ass from "./admin/assignment";
 function App() {
   return (
     <>
-      {/*  <Navbar /> */}
       <Routes>
         <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/:sbj" element={<Ass />} />
+        <Route path="/admin/:sbj/:grade" element={<Ass />} />
         <Route path="/admin/Students" element={<Stats />} />
+        <Route path="/admin/new-assignment" element={<Quize />} />
         <Route path="/sign-up" element={<Sign_up />} />
         <Route path="/sign-in" element={<Sign_in />} />
         <Route path="/student" element={<Student />} />

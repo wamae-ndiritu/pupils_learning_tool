@@ -10,10 +10,10 @@ function Navbar(params) {
       </figure>
 
       <div className="link-b" onClick={() => Navigate("/student")}>
-        student
+        dashboard
       </div>
 
-      <div className="link-b" onClick={() => Navigate("/admin/students")}>
+      <div className="link-b" onClick={() => Navigate("/sign-in")}>
         logout
       </div>
     </nav>

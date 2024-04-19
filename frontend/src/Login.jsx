@@ -6,7 +6,7 @@ const Sign_in = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const submit = () => {
     setUser({ email: "", password: "" });
-    navigate("/");
+    navigate("/student");
   };
   return (
     <div className="grid grid2">

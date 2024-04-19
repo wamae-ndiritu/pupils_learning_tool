@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { students } from "../Mock_data";
-import Navbar from "../nav";
+import Navbar from "./nav";
 function Stats() {
   const [grad_e, chgrad_e] = useState("grade");
   return (

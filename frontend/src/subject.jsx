@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import Quize from "./quizes";
 import Navbar from "./nav";
+import { topic } from "./Mock_data";
 function Topic() {
   const subject = useParams().sbj;
-  const _topics = ["ass1", "ass2", "ass3"];
+  const assignment = topic[Object.keys(topic).find((t) => t == subject)];
   return (
     <div className="grid">
       <Navbar />
@@ -14,10 +15,10 @@ function Topic() {
         <br />
         <section className="card ass">
           <h3>Assignments</h3>
-          {_topics.map((i) => (
+          {Object.keys(assignment).map((i) => (
             <details>
               <summary>{i}</summary>
-              <Quize />
+              <Quize quiz={assignment[`${i}`]} />
             </details>
           ))}
         </section>

@@ -9,13 +9,16 @@ function Navbar(params) {
         <p>pupil learning tool</p>
       </figure>
       <div className="link-b" onClick={() => Navigate("/admin")}>
-        admin
+        dashboard
       </div>
 
       <div className="link-b" onClick={() => Navigate("/admin/students")}>
         student list
       </div>
-      <div className="link-b" onClick={() => Navigate("/admin/students")}>
+      <div className="link-b" onClick={() => Navigate("/admin/new-assignment")}>
+        newassignment
+      </div>
+      <div className="link-b" onClick={() => Navigate("/sign-in")}>
         logout
       </div>
     </nav>
