@@ -1,17 +1,49 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fornew, update } from "../slice";
 import Navbar from "./nav";
-import { admin_data } from "../Mock_data";
-import { useDispatch } from "react-redux";
-import { fornew } from "../slice";
 function Ass() {
   const grade = useParams();
   const dispath = useDispatch();
   const navigate = useNavigate();
+  const admin_data = useSelector(({ Admin }) => Admin.admin_data);
   let locol = admin_data[`${grade.sbj}`];
   locol = locol[`${grade.grade}`];
   function add() {
     dispath(fornew([grade.sbj, grade.grade]));
     navigate("/admin/new-assignment");
+  }
+  function del() {
+    let t = {
+      ...admin_data,
+      [grade.sbj]: { ...admin_data[`${grade.sbj}`] },
+    };
+    delete t[`${grade.sbj}`][`${grade.grade}`];
+    dispath(update(t));
+    navigate("/admin");
+  }
+  console.log(admin_data);
+  function delq(topic, quiz) {
+    let t = {
+      ...admin_data,
+      [grade.sbj]: {
+        ...admin_data[`${grade.sbj}`],
+        [grade.grade]: {
+          ...admin_data[`${grade.sbj}`][`${grade.grade}`],
+          [`${topic}`]: {
+            ...admin_data[`${grade.sbj}`][`${grade.grade}`][`${topic}`],
+            [`${quiz}`]: [
+              ...admin_data[`${grade.sbj}`][`${grade.grade}`][`${topic}`][
+                `${quiz}`
+              ],
+            ],
+          },
+        },
+      },
+    };
+    delete t[`${grade.sbj}`][`${grade.grade}`][`${topic}`][`${quiz}`];
+    console.log(t);
+    dispath(update(t));
   }
   return (
     <div className="grid">
@@ -56,7 +88,12 @@ function Ass() {
                     ))}
                   </ol>
                   <button className="btn">edit quize</button>
-                  <button className="btn-cancel">delete quize</button>
+                  <button
+                    className="btn-cancel"
+                    onClick={() => delq(topic, ass)}
+                  >
+                    delete quize
+                  </button>
                 </div>
               ))}
             </details>
@@ -64,7 +101,9 @@ function Ass() {
           <button className="btn" onClick={add}>
             add quize
           </button>
-          <button className="btn-cancel">delete grade</button>
+          <button className="btn-cancel" onClick={del}>
+            delete grade
+          </button>
         </section>
       </main>
     </div>

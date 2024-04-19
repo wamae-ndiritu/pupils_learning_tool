@@ -1,10 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import Navbar from "./nav";
-import { admin_data, no_student, students, subject } from "../Mock_data";
+import { no_student, students, subject } from "../Mock_data";
+import { useDispatch, useSelector } from "react-redux";
+import { update } from "../slice";
 
 function Admin() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const admin_data = useSelector(({ Admin }) => Admin.admin_data);
+  function del(sub) {
+    let p = { ...admin_data };
+    delete p[`${sub}`];
+    dispatch(update(p));
+  }
   return (
     <div className="grid">
       <Navbar />
@@ -41,11 +49,11 @@ function Admin() {
                 ))}
               </ol>
 
-              <button className="btn-cancel">delete subject</button>
+              <button className="btn-cancel" onClick={() => del(subject)}>
+                delete subject
+              </button>
             </div>
           ))}
-
-          <button className="btn">add subject</button>
         </section>
       </main>
     </div>

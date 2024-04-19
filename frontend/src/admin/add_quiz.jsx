@@ -11,113 +11,170 @@ function Quize() {
             {id: Number(),question: "", mark: Number(),multiple: "depends",
               answer: "",},],},
       },},};*/
-  const exist = useSelector(({ Ass }) => Ass.fornew);
+  const admin = useSelector(({ Admin }) => Admin);
+  const exist = admin.fornew;
+  const dispatch = useDispatch();
   const intial = {
     subject: exist ? exist[0] : "",
     grade: exist ? exist[1] : "",
     topic: "",
-    question: "",
-    marks: "",
-    number: Number(),
-    A: "",
-    B: "",
-    C: "",
-    D: "",
-    answer: "",
+    number: 0,
+    quize: [],
   };
   const [details, chDetails] = useState(intial);
+  const [mult, chmult] = useState([]);
+
   const dispath = useDispatch();
+  const ids = Array.from({ length: details.number }, () => "id");
   function add() {
+    console.log(details);
+    console.log(mult);
+    let q = Object.keys(
+      admin.admin_data[`${details.subject}`][`${details.grade}`][
+        `${details.topic}`
+      ] || 1
+    )?.length;
+
+    let quize = { ...details };
+    delete quize["subject"];
+    delete quize["topic"];
+    delete quize["grade"];
+    delete quize["number"];
+    //console.log(quize);
     const assignment = {
       [details.subject]: {
         [details.grade]: {
           [details.topic]: {
-            quiz: [],
+            [`quiz${q + 1}`]: [{ ...details }],
           },
         },
       },
     };
-    console.log(assignment);
+    //console.log(assignment);
   }
-  let arr;
+  function change(e, id) {
+    console.log(details.quize);
+    let q = details.quize.map((it) => ({
+      ...it,
+      id: 1,
+      [e.target.name]: e.target.value,
+    }));
+    chDetails((prev) => ({ ...prev, quize: [...prev.quize, q] }));
+    console.log(q);
+  }
   //adds the questions on the UI
-  arr = Array.from({ length: details.number }, () => (
-    <>
-      question:
-      <textarea
-        name="question"
-        id=""
-        cols="20"
-        onChange={(e) =>
-          chDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-        }
-      ></textarea>
-      <br />
-      marks:
-      <input
-        type="number"
-        name="marks"
-        onChange={(e) =>
-          chDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-        }
-      />
-      <br />
-      <p>choices:</p>
-      A:
-      <input
-        type="text"
-        name="A"
-        onChange={(e) =>
-          chDetails((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
-      />
-      B:
-      <input
-        type="text"
-        name="B"
-        onChange={(e) =>
-          chDetails((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
-      />
-      C:
-      <input
-        type="text"
-        name="C"
-        onChange={(e) =>
-          chDetails((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
-      />
-      D:
-      <input
-        type="text"
-        name="D"
-        onChange={(e) =>
-          chDetails((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
-      />
-      <br />
-      Answer:
-      <input
-        type="text"
-        name="answer"
-        onChange={(e) =>
-          chDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-        }
-      />
-    </>
-  ));
+  let arr = [];
+  for (let i = 0; i < details.number; i++) {
+    let id = i + 1;
+    arr.push(
+      <>
+        question{id}:
+        <textarea
+          name="question"
+          cols="20"
+          onClick={(e) =>
+            chDetails((prev) => ({
+              ...prev,
+              quize: [...prev.quize, { id: id }],
+            }))
+          }
+          onChange={(e) =>
+            chDetails((prev) => ({
+              ...prev,
+              quize: prev.quize.map((ite, ind) =>
+                ind == i ? { ...ite, [e.target.name]: e.target.value } : ite
+              ),
+            }))
+          }
+        ></textarea>
+        <br />
+        marks:
+        <input
+          type="number"
+          name="marks"
+          onChange={(e) =>
+            chDetails((prev) => ({
+              ...prev,
+              quize: prev.quize.map((ite, ind) =>
+                ind == i ? { ...ite, [e.target.name]: e.target.value } : ite
+              ),
+            }))
+          }
+        />
+        <br />
+        <p>choices:</p>
+        A:
+        <input
+          type="text"
+          name="A"
+          onClick={(e) => chmult((prev) => ({ id: id }))}
+          onChange={(e) =>
+            chmult((prev) => ({
+              ...prev,
+              quize: prev.quize.map((ite, ind) =>
+                ind == i ? { ...ite, [e.target.name]: e.target.value } : ite
+              ),
+            }))
+          }
+        />
+        B:
+        <input
+          type="text"
+          name="B"
+          onChange={(e) =>
+            chmult((prev) => ({
+              ...prev,
+              quize: prev.quize.map((ite, ind) =>
+                ind == i ? { ...ite, [e.target.name]: e.target.value } : ite
+              ),
+            }))
+          }
+        />
+        C:
+        <input
+          type="text"
+          name="C"
+          onChange={(e) =>
+            chmult((prev) => ({
+              ...prev,
+              quize: prev.quize.map((ite, ind) =>
+                ind == i ? { ...ite, [e.target.name]: e.target.value } : ite
+              ),
+            }))
+          }
+        />
+        D:
+        <input
+          type="text"
+          name="D"
+          onChange={(e) =>
+            chmult((prev) => ({
+              ...prev,
+              quize: prev.quize.map((ite, ind) =>
+                ind == i ? { ...ite, [e.target.name]: e.target.value } : ite
+              ),
+            }))
+          }
+        />
+        <br />
+        Answer:
+        <input
+          type="text"
+          name="answer"
+          onChange={(e) =>
+            chDetails((prev) => ({
+              ...prev,
+              quize: prev.quize.map((ite, ind) =>
+                ind == i ? { ...ite, [e.target.name]: e.target.value } : ite
+              ),
+            }))
+          }
+        />
+        <br />
+        <hr />
+      </>
+    );
+  }
 
   return (
     <div className="grid">
