@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { Admin } from "./slice.jsx";
+import { Admin, Session, Student } from "./slice.jsx";
 export const store = configureStore({
   reducer: {
     Admin,
+    Student,
+    Session,
   },
 });

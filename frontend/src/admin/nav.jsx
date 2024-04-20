@@ -1,7 +1,10 @@
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../slice";
 
 function Navbar(params) {
   const Navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <nav className="card inlinegrid">
       <figure>
@@ -18,7 +21,7 @@ function Navbar(params) {
       <div className="link-b" onClick={() => Navigate("/admin/new-assignment")}>
         newassignment
       </div>
-      <div className="link-b" onClick={() => Navigate("/sign-in")}>
+      <div className="link-b" onClick={() => dispatch(logout())}>
         logout
       </div>
     </nav>

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Router, Routes } from "react-router-dom";
 import Sign_up from "./signup";
 import Sign_in from "./Login";
 import Student from "./student_page";
@@ -7,21 +7,38 @@ import Quize from "./admin/add_quiz";
 import Admin from "./admin/admin";
 import Stats from "./admin/Stats";
 import Ass from "./admin/assignment";
+import { useSelector } from "react-redux";
 function App() {
+  const log = useSelector(({ Session }) => Session.logged);
+  const admin = useSelector(({ Session }) => Session.isadmin);
+  function Auth() {
+    if (!log) {
+      return <Navigate to="/sign-in" />;
+    }
+    return <Outlet />;
+  }
+  function Isadmin() {
+    //to see it wwork go to sign-up and check techer then login
+    if (!log && !admin) {
+      return <Navigate to="/sign-in" />;
+    }
+    return <Outlet />;
+  }
   return (
-    <>
-      <Routes>
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/:sbj/:grade" element={<Ass />} />
-        <Route path="/admin/Students" element={<Stats />} />
-        <Route path="/admin/new-assignment" element={<Quize />} />
-        <Route path="/sign-up" element={<Sign_up />} />
-        <Route path="/sign-in" element={<Sign_in />} />
+    <Routes>
+      <Route path="/sign-up" element={<Sign_up />} />
+      <Route element={<Auth />}>
+        <Route element={<Isadmin />}>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/:sbj/:grade" element={<Ass />} />
+          <Route path="/admin/Students" element={<Stats />} />
+          <Route path="/admin/new-assignment" element={<Quize />} />
+        </Route>
         <Route path="/student" element={<Student />} />
-        <Route path="/student/:sbj" element={<Topic />} />
-        <Route path="/student/:sbj/:id" element={<Quize />} />
-      </Routes>
-    </>
+        <Route path="/student/:sbj/:id" element={<Topic />} />
+      </Route>
+      <Route path="*" element={<Sign_in />} />
+    </Routes>
   );
 }
 export default App;

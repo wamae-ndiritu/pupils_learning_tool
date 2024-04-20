@@ -1,12 +1,23 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { login } from "./slice";
 const Sign_up = () => {
   const navigate = useNavigate();
-  const initial = { email: "", password: "", grade: "", name: "" };
+  const dispatch = useDispatch();
+  const initial = {
+    email: "",
+    password: "",
+    grade: "",
+    name: "",
+    isadmin: false,
+  };
   const [user, setUser] = useState(initial);
+
   const submit = () => {
-    setUser(initial);
-    navigate("/admin");
+    dispatch(login({ logged: true, isadmin: user.isadmin }));
+
+    user.isadmin ? navigate("/admin") : navigate("/student");
   };
   return (
     <div className="grid grid2">
@@ -51,7 +62,12 @@ const Sign_up = () => {
           />
         </span>
         <div>
-          <input type="checkbox" /> teacher
+          <input
+            type="checkbox"
+            value={user.isadmin}
+            onClick={(e) => setUser((p) => ({ ...p, isadmin: !p.isadmin }))}
+          />{" "}
+          teacher
           <br />
           <button className="btn" onClick={submit}>
             sign-up

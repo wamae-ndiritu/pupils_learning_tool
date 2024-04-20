@@ -263,7 +263,7 @@ export const topic = {
 
 export const admin_data = {
   mathematics: {
-    Grade6: {
+    Grade4: {
       indices: {
         quiz1: [
           {
@@ -421,6 +421,68 @@ export const admin_data = {
   },
   kiswahili: {
     Grade4: {
+      ngeli: {
+        quiz1: [
+          {
+            id: 1,
+            question: "what is the Name",
+            mark: 1,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: "mark",
+          },
+          {
+            id: 2,
+            question: "what is the Name",
+            mark: 2,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: ["mark", "mathew"],
+          },
+          {
+            id: 3,
+            question: "what is the Name",
+            mark: 2,
+            answer: "name",
+          },
+          {
+            id: 4,
+            question: "what is the Name",
+            mark: 1,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: "mathew",
+          },
+        ],
+        quiz2: [
+          {
+            id: 1,
+            question: "what is the Name",
+            mark: 1,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: "mark",
+          },
+          {
+            id: 2,
+            question: "what is the Name",
+            mark: 2,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: ["mark", "mathew"],
+          },
+          {
+            id: 3,
+            question: "what is the Name",
+            mark: 2,
+            answer: "name",
+          },
+          {
+            id: 4,
+            question: "what is the Name",
+            mark: 1,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: "mark",
+          },
+        ],
+      },
+    },
+    Grade8: {
       ngeli: {
         quiz1: [
           {

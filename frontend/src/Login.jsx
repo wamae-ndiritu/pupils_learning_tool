@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { login } from "./slice";
 
 const Sign_in = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [user, setUser] = useState({ email: "", password: "" });
   const submit = () => {
     setUser({ email: "", password: "" });
+    dispatch(login({ logged: true, isadmin: false }));
     navigate("/student");
   };
   return (

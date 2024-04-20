@@ -13,6 +13,9 @@ function Admin() {
     delete p[`${sub}`];
     dispatch(update(p));
   }
+  console.log(
+    Object.keys(admin_data).map((p) => Object.keys(admin_data[p]).length)[0]
+  );
   return (
     <div className="grid">
       <Navbar />
@@ -24,11 +27,17 @@ function Admin() {
           </div>
 
           <div>
-            <h3>{subject.length}</h3>
+            <h3>{Object.keys(admin_data).length}</h3>
             <p> subjects</p>
           </div>
           <div>
-            <h3>{Object.keys(students).length}</h3>
+            <h3>
+              {
+                Object.keys(admin_data).map(
+                  (p) => Object.keys(admin_data[p]).length
+                )[0]
+              }
+            </h3>
             <p> Grades</p>
           </div>
         </section>

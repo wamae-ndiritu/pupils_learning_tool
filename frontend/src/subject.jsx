@@ -1,10 +1,17 @@
 import { useParams } from "react-router-dom";
 import Quize from "./quizes";
 import Navbar from "./nav";
-import { topic } from "./Mock_data";
+
+import { useSelector } from "react-redux";
 function Topic() {
-  const subject = useParams().sbj;
-  const assignment = topic[Object.keys(topic).find((t) => t == subject)];
+  const data = useSelector(({ Admin }) => Admin.admin_data);
+  const grade = useSelector(({ Student }) => Student.grade);
+  let subject = useParams().id;
+  let t_opic = useParams().sbj;
+  let assignment = {};
+  Object.keys(data[t_opic][grade][subject]).map((k) =>
+    Object.values(data[t_opic][grade][subject]).map((g) => (assignment[k] = g))
+  );
   return (
     <div className="grid">
       <Navbar />

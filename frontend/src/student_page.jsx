@@ -1,9 +1,21 @@
-import { subject, topics } from "./Mock_data";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./nav";
+import { useSelector } from "react-redux";
 function Student() {
+  const topic = useSelector(({ Admin }) => Admin.admin_data);
   const navigate = useNavigate();
+  const grade = useSelector(({ Student }) => Student.grade);
+  let list = {};
+  Object.keys(topic).map((p) => {
+    list[p] = [];
+    console.log(list);
+    Object.keys(topic[p][grade]).map((l) => list[p].push(l));
+  });
 
+  topic["mathematics"][
+    Object.keys(topic["mathematics"]).find((p) => p == grade)
+  ];
+  //);
   return (
     <div className="grid">
       <Navbar />
@@ -12,14 +24,14 @@ function Student() {
         <hr />
         <section className="card students">
           <h4>available subjects</h4>
-          {Object.keys(topics).map((i) => (
+          {Object.keys(list).map((i) => (
             <details open>
               <summary>{i}</summary>
               <ol>
-                {Object.values(topics[i]).map((j) => (
+                {Object.values(list[i]).map((j) => (
                   <li
                     className="topic"
-                    onClick={() => navigate(`/student/${j}`)}
+                    onClick={() => navigate(`/student/${i}/${j}`)}
                   >
                     {j}
                   </li>

@@ -1,7 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fornew, update } from "../slice";
+import { fornew, update, edit } from "../slice";
 import Navbar from "./nav";
+import { subject } from "../Mock_data";
+import Quize from "./add_quiz";
 function Ass() {
   const grade = useParams();
   const dispath = useDispatch();
@@ -13,6 +15,17 @@ function Ass() {
     dispath(fornew([grade.sbj, grade.grade]));
     navigate("/admin/new-assignment");
   }
+  function ed(top, q) {
+    const data = {
+      subject: grade.sbj,
+      grade: grade.grade,
+      topic: top,
+      quiz: locol[top][q],
+    };
+
+    dispath(edit(data));
+    navigate("/admin/new-assignment");
+  }
   function del() {
     let t = {
       ...admin_data,
@@ -22,7 +35,7 @@ function Ass() {
     dispath(update(t));
     navigate("/admin");
   }
-  console.log(admin_data);
+
   function delq(topic, quiz) {
     let t = {
       ...admin_data,
@@ -42,9 +55,9 @@ function Ass() {
       },
     };
     delete t[`${grade.sbj}`][`${grade.grade}`][`${topic}`][`${quiz}`];
-    console.log(t);
     dispath(update(t));
   }
+
   return (
     <div className="grid">
       <Navbar />
@@ -87,7 +100,9 @@ function Ass() {
                       </li>
                     ))}
                   </ol>
-                  <button className="btn">edit quize</button>
+                  <button className="btn" onClick={() => ed(topic, ass)}>
+                    edit quize
+                  </button>
                   <button
                     className="btn-cancel"
                     onClick={() => delq(topic, ass)}
