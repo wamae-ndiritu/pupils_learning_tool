@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { students } from "../Mock_data";
-import Navbar from "./nav";
+import Navbar from "../nav";
 function Stats() {
   const [grad_e, chgrad_e] = useState("grade");
   return (
@@ -9,9 +9,7 @@ function Stats() {
       <main className="card ">
         <h3> students</h3>
         <select onChange={(e) => chgrad_e(e.target.value)}>
-          <option disable hidden>
-            grade
-          </option>
+          <option hidden>grade</option>
           {Object.keys(students).map((grade) => (
             <option>{grade}</option>
           ))}

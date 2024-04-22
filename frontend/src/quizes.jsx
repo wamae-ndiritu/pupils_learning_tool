@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { result } from "./slice";
 let list = [];
 function checkAnswers(previousObject, updatedObject) {
   const changes = {};
@@ -37,8 +39,9 @@ function checkAnswers(previousObject, updatedObject) {
 
   return changes;
 }
-function Quize({ quiz }) {
+function Quize({ quiz, num }) {
   const [answer, setanswer] = useState({});
+  const dispatch = useDispatch();
   function change(e) {
     switch (e.target.type) {
       case "text":
@@ -63,10 +66,10 @@ function Quize({ quiz }) {
   function submit() {
     if (Object.keys(answer).length < 1) return;
     const wrong_answers = checkAnswers(answer, true_answers);
-    const result = `${
+    const results = `${
       Object.keys(true_answers).length - Object.keys(wrong_answers).length
     }/${Object.keys(true_answers).length}`;
-    console.log(result);
+    dispatch(result({ quiz: num, mark: results }));
   }
   return (
     <>

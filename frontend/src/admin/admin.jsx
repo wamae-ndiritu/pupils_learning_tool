@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "./nav";
-import { no_student, students, subject } from "../Mock_data";
+import Navbar from "../nav";
+import { no_student } from "../Mock_data";
 import { useDispatch, useSelector } from "react-redux";
 import { update } from "../slice";
 
@@ -32,11 +32,9 @@ function Admin() {
           </div>
           <div>
             <h3>
-              {
-                Object.keys(admin_data).map(
-                  (p) => Object.keys(admin_data[p]).length
-                )[0]
-              }
+              {Object.keys(admin_data).map(
+                (p) => Object.keys(admin_data[p]).length
+              )[0] || 0}
             </h3>
             <p> Grades</p>
           </div>

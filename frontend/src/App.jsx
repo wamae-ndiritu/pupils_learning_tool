@@ -19,8 +19,8 @@ function App() {
   }
   function Isadmin() {
     //to see it wwork go to sign-up and check techer then login
-    if (!log && !admin) {
-      return <Navigate to="/sign-in" />;
+    if (log && !admin) {
+      return <Navigate to={"/student"} />;
     }
     return <Outlet />;
   }

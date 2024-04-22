@@ -7,8 +7,37 @@
   background-color: rgb(227, 227, 236);
   text-transform: capitalize;
 }
-.card-h {
-  height: 100vh;
+.log {
+  position: fixed;
+  text-align: center;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(227, 227, 236);
+}
+.card-log {
+  text-align: unset;
+  background-color: white;
+  position: relative;
+  margin: 20vh 25%;
+  text-transform: capitalize;
+  padding: 10px 20px;
+}
+.card-log > section {
+  text-align: left;
+}
+.card-log > section > span > input {
+  width: 28vw;
+}
+.card-log > section > span > select {
+  background-color: rgb(226, 223, 223);
+  width: 28vw;
+}
+.card-log > section > button {
+  background-color: rgb(114, 139, 227);
+  margin-top: 5px;
+  width: 28vw;
 }
 .students {
   text-align: unset;

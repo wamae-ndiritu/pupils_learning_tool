@@ -1,9 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fornew, update, edit } from "../slice";
-import Navbar from "./nav";
-import { subject } from "../Mock_data";
-import Quize from "./add_quiz";
+import Navbar from "../nav";
+
 function Ass() {
   const grade = useParams();
   const dispath = useDispatch();

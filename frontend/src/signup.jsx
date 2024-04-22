@@ -20,65 +20,72 @@ const Sign_up = () => {
     user.isadmin ? navigate("/admin") : navigate("/student");
   };
   return (
-    <div className="grid grid2">
-      <img src="" alt="logo" />
-      <main className="card card-h">
+    <div className="log">
+      <main className="card-log">
         <h1> sign-up </h1>
-        <span>
-          user name:
-          <input
-            type="text"
-            onChange={(e) => setUser((p) => ({ ...p, name: e.target.value }))}
-            value={user.name}
-          />
-        </span>
-        <br />
-        <span>
-          email:
-          <input
-            type="email"
-            onChange={(e) => setUser((p) => ({ ...p, email: e.target.value }))}
-            value={user.email}
-          />
-        </span>
-        <br />
-        <span>
-          Grade:
-          <input
-            type="text"
-            onChange={(e) => setUser((p) => ({ ...p, grade: e.target.value }))}
-            value={user.grade}
-          />
-        </span>
-        <br />
-        <span>
-          password:
-          <input
-            type="password"
-            onChange={(e) =>
-              setUser((p) => ({ ...p, password: e.target.value }))
-            }
-            value={user.password}
-          />
-        </span>
-        <div>
-          <input
-            type="checkbox"
-            value={user.isadmin}
-            onClick={(e) => setUser((p) => ({ ...p, isadmin: !p.isadmin }))}
-          />{" "}
-          teacher
-          <br />
-          <button className="btn" onClick={submit}>
-            sign-up
-          </button>
-        </div>
-        <p>
-          already have an account?
-          <span className="link" onClick={() => navigate("/Sign-in")}>
-            sign-in
+        <section>
+          <span>
+            full name
+            <br />
+            <input
+              type="text"
+              onChange={(e) => setUser((p) => ({ ...p, name: e.target.value }))}
+              value={user.name}
+            />
           </span>
-        </p>
+          <br />
+          <span>
+            email
+            <br />
+            <input
+              type="email"
+              onChange={(e) =>
+                setUser((p) => ({ ...p, email: e.target.value }))
+              }
+              value={user.email}
+            />
+          </span>
+          <br />
+          <span>
+            current Grade
+            <br />
+            <select
+              onChange={(e) =>
+                setUser((p) => ({ ...p, grade: e.target.value }))
+              }
+            >
+              <option hidden>--Select your Grade--</option>
+            </select>
+          </span>
+          <br />
+          <span>
+            password
+            <br />
+            <input
+              type="password"
+              onChange={(e) =>
+                setUser((p) => ({ ...p, password: e.target.value }))
+              }
+              value={user.password}
+            />
+          </span>
+          <div>
+            <input
+              type="checkbox"
+              value={user.isadmin}
+              onClick={(e) => setUser((p) => ({ ...p, isadmin: !p.isadmin }))}
+            />{" "}
+            teacher
+            <br />
+          </div>
+          <button onClick={submit}>Submit</button>
+          <p>
+            already have an account?
+            <span className="link" onClick={() => navigate("/Sign-in")}>
+              sign-in
+            </span>
+          </p>
+        </section>
       </main>
     </div>
   );

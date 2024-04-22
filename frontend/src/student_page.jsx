@@ -8,7 +8,6 @@ function Student() {
   let list = {};
   Object.keys(topic).map((p) => {
     list[p] = [];
-    console.log(list);
     Object.keys(topic[p][grade]).map((l) => list[p].push(l));
   });
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Navbar from "./nav";
+import Navbar from "../nav";
 import { useDispatch, useSelector } from "react-redux";
 import { newass } from "../slice";
 import { useNavigate } from "react-router-dom";

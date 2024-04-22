@@ -45,10 +45,10 @@ const admin = createSlice({
 });
 const stude = createSlice({
   name: "student",
-  initialState: { grade: "Grade4" },
+  initialState: { grade: "Grade4", results: [] },
   reducers: {
-    fornew: (state, { payload }) => {
-      state.fornew = payload;
+    result: (state, { payload }) => {
+      state.results = [...state.results, payload];
     },
   },
 });
@@ -67,7 +67,7 @@ const session = createSlice({
   },
 });
 export const { fornew, update, newass, edit } = admin.actions;
-export const {} = stude.actions;
+export const { result } = stude.actions;
 export const { login, logout } = session.actions;
 export const Admin = admin.reducer;
 export const Student = stude.reducer;
