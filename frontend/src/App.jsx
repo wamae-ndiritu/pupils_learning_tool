@@ -8,19 +8,21 @@ import Admin from "./admin/admin";
 import Stats from "./admin/Stats";
 import Ass from "./admin/assignment";
 import StudentDashboard from "./components/StudentDashboard";
+import GradeScreen from "./screens/GradeScreen";
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/:sbj/:grade" element={<Ass />} />
-        <Route path="/admin/Students" element={<Stats />} />
-        <Route path="/admin/new-assignment" element={<Quize />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="" element={<StudentDashboard />} />
-        <Route path="/student/:sbj" element={<Topic />} />
-        <Route path="/student/:sbj/:id" element={<Quize />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/admin/:sbj/:grade' element={<Ass />} />
+        <Route path='/admin/Students' element={<Stats />} />
+        <Route path='/admin/new-assignment' element={<Quize />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/sign-in' element={<SignIn />} />
+        <Route path='' element={<StudentDashboard />} />
+        <Route path='/student/:sbj' element={<Topic />} />
+        <Route path='/student/:sbj/:id' element={<Quize />} />
+        <Route path='/grade/:id/subjects' element={<GradeScreen />} />
       </Routes>
     </>
   );

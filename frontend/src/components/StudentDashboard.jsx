@@ -1,21 +1,11 @@
 import { Link } from "react-router-dom";
 import profileAvatar from "../images/profile-avatar.png";
+import Navbar from "./Navbar";
 
 const StudentDashboard = () => {
   return (
-    <div className='bg-indigo-300 flex-grow-1'>
-      {/* Top Navigation Bar */}
-      <nav className='bg-indigo-600 p-4'>
-        <div className='container mx-auto flex justify-between items-center'>
-          <div className='text-white text-xl font-bold'>eSoma</div>
-          <ul className='flex space-x-4 text-white'>
-            <li>Subjects</li>
-            <li>Grades</li>
-            <li>Logout</li>
-          </ul>
-        </div>
-      </nav>
-
+    <div className='bg-indigo-300 min-h-screen flex-grow-1'>
+        <Navbar />
       {/* Learning Progress Widget */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-8 mt-8'>
         <div className='col-span-1 bg-indigo-700 p-6 rounded-lg'>
