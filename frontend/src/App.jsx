@@ -17,7 +17,7 @@ function App() {
         <Route path="/admin/new-assignment" element={<Quize />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/student" element={<Student />} />
+        <Route path="" element={<Student />} />
         <Route path="/student/:sbj" element={<Topic />} />
         <Route path="/student/:sbj/:id" element={<Quize />} />
       </Routes>
