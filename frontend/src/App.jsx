@@ -7,6 +7,7 @@ import Quize from "./admin/add_quiz";
 import Admin from "./admin/admin";
 import Stats from "./admin/Stats";
 import Ass from "./admin/assignment";
+import StudentDashboard from "./components/StudentDashboard";
 function App() {
   return (
     <>
@@ -17,7 +18,7 @@ function App() {
         <Route path="/admin/new-assignment" element={<Quize />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="" element={<Student />} />
+        <Route path="" element={<StudentDashboard />} />
         <Route path="/student/:sbj" element={<Topic />} />
         <Route path="/student/:sbj/:id" element={<Quize />} />
       </Routes>
