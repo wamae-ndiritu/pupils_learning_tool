@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import Sign_up from "./signup";
-import Sign_in from "./Login";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 import Student from "./student_page";
 import Topic from "./subject";
 import Quize from "./admin/add_quiz";
@@ -15,8 +15,8 @@ function App() {
         <Route path="/admin/:sbj/:grade" element={<Ass />} />
         <Route path="/admin/Students" element={<Stats />} />
         <Route path="/admin/new-assignment" element={<Quize />} />
-        <Route path="/sign-up" element={<Sign_up />} />
-        <Route path="/sign-in" element={<Sign_in />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-in" element={<SignIn />} />
         <Route path="/student" element={<Student />} />
         <Route path="/student/:sbj" element={<Topic />} />
         <Route path="/student/:sbj/:id" element={<Quize />} />
