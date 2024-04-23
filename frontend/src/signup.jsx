@@ -13,10 +13,12 @@ const Sign_up = () => {
     isadmin: false,
   };
   const [user, setUser] = useState(initial);
-
+  let temp = [];
+  for (let i = 1; i <= 12; i++) {
+    temp.push(`Grade${i}`);
+  }
   const submit = () => {
     dispatch(login({ logged: true, isadmin: user.isadmin }));
-
     user.isadmin ? navigate("/admin") : navigate("/student");
   };
   return (
@@ -55,6 +57,11 @@ const Sign_up = () => {
               }
             >
               <option hidden>--Select your Grade--</option>
+              {temp.map((p) => (
+                <>
+                  <option>{p}</option>
+                </>
+              ))}
             </select>
           </span>
           <br />

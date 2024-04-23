@@ -5,7 +5,7 @@ import { newass } from "../slice";
 import { useNavigate } from "react-router-dom";
 
 function Quize(present) {
-  /*const structure = {
+  /*structureof data required {
     Subject: {
       Grade: {
         Topic: {
@@ -22,8 +22,8 @@ function Quize(present) {
     subject: exist ? exist[0] : data?.subject,
     Grade: exist ? exist[1] : data?.grade,
     topic: data?.topic,
-    number: data?.quiz.length || 0,
-    quize: data?.quiz || [],
+    number: data?.quiz[1].length || 0,
+    quize: data?.quiz[1] || [],
   };
   const [details, chDetails] = useState(intial);
   let intmul = {};
@@ -40,6 +40,7 @@ function Quize(present) {
   });
   const [mult, chmult] = useState(intmul || {});
   function add() {
+    console.log(details.quize);
     switch (true) {
       case details.subject == undefined:
         alert("add subject");
@@ -55,50 +56,65 @@ function Quize(present) {
         break;
 
       case true:
+        let u = {};
+        //sets the question number
+        let q =
+          admin.admin_data[details.subject] &&
+          admin.admin_data[details.subject][details.Grade] &&
+          admin.admin_data[details.subject][details.Grade][details.topic] &&
+          Object.keys(
+            admin.admin_data[details.subject][details.Grade][details.topic]
+          ).length + 1;
+        q = data?.quiz[0] || `quize${q || 1}`;
+        console.log(q);
+        //creates the data to be addwd
         let assignment = {
           [details.subject]: {
             [details.Grade]: {
               [details.topic]: {
-                quiz: [],
+                [q]: [],
               },
             },
           },
         };
-        let u = {};
-        Object.keys(mult).map((p) => {
+        //puts multiple amswers to one array
+        Object.keys(mult).forEach((p) => {
           p = Number(p);
           u[p] = Object.values(mult[p]).filter((b) => b !== "");
         });
-        details.quize.map((val) => {
-          assignment[details.subject][details.Grade][details.topic][
-            "quiz"
-          ].push({ ...val, multiple: u[val.id] });
+        //adds all the question to the data tobe addedd
+        details.quize.forEach((val) => {
+          assignment[details.subject][details.Grade][details.topic][q].push({
+            ...val,
+            multiple: u[val.id],
+          });
         });
+
+        //checks for multiple answers
+        assignment[details.subject][details.Grade][details.topic][q].forEach(
+          (p) => {
+            typeof p.answer == "string"
+              ? (p.answer = p.answer?.replace(/\s/g, "").split("&"))
+              : null;
+          }
+        );
         dispatch(
           newass({
             assignment,
             val: [details.subject, details.Grade, details.topic],
             present: admin.admin_data,
-            l:
-              admin.admin_data[details.subject] &&
-              admin.admin_data[details.subject][details.Grade] &&
-              admin.admin_data[details.subject][details.Grade][details.topic] &&
-              Object.keys(
-                admin.admin_data[details.subject][details.Grade][details.topic]
-              ).length,
+            l: q,
           })
         );
-
+        dispatch(newass(undefined));
         navigate(`/admin/${details.subject}/${details.Grade}`);
     }
   }
-
   function change(e, id) {
+    //console.log(details.quize[id - 1]?.answer?.split("&"));
     chDetails((prev) => {
-      const ids = id - 1;
       const find = prev.quize.findIndex((item) => item.id == id);
-      const u = prev.quize[ids]?.answer?.split("&");
-      console.log(u);
+      const ids = id - 1;
       if (find !== -1) {
         return {
           ...prev,
@@ -136,8 +152,8 @@ function Quize(present) {
                   marks:
                   <input
                     type="number"
-                    name="marks"
-                    value={details.quize[i]["marks"]}
+                    name="mark"
+                    value={details.quize[i]["mark"]}
                     onChange={(e) => change(e, id)}
                   />
                   <br />
@@ -204,12 +220,6 @@ function Quize(present) {
                   />
                   <br />
                   Answer:
-                  <input
-                    type="text"
-                    name="answer"
-                    value={details.quize[i]["answer"]}
-                    onChange={(e) => change(e, id)}
-                  />
                   <input
                     type="text"
                     name="answer"

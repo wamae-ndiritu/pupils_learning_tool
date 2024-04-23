@@ -13,9 +13,7 @@ function Admin() {
     delete p[`${sub}`];
     dispatch(update(p));
   }
-  console.log(
-    Object.keys(admin_data).map((p) => Object.keys(admin_data[p]).length)[0]
-  );
+
   return (
     <div className="grid">
       <Navbar />

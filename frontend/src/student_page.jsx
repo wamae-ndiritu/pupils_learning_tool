@@ -8,7 +8,7 @@ function Student() {
   let list = {};
   Object.keys(topic).map((p) => {
     list[p] = [];
-    Object.keys(topic[p][grade]).map((l) => list[p].push(l));
+    topic[p][grade] && Object.keys(topic[p][grade]).map((l) => list[p].push(l));
   });
 
   topic["mathematics"][

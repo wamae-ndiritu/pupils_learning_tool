@@ -6,14 +6,21 @@ import { useSelector } from "react-redux";
 function Topic() {
   const data = useSelector(({ Admin }) => Admin.admin_data);
   const grade = useSelector(({ Student }) => Student.grade);
-  const results = useSelector(({ Student }) => Student.results);
+  const Results = useSelector(({ Student }) => Student.results);
   let subject = useParams().id;
   let t_opic = useParams().sbj;
   let assignment = {};
-  Object.keys(data[t_opic][grade][subject]).map((k) =>
-    Object.values(data[t_opic][grade][subject]).map((g) => (assignment[k] = g))
+  //searches for assgnment to display
+  Object.keys(data[t_opic][grade][subject]).forEach((k) =>
+    Object.values(data[t_opic][grade][subject]).forEach(
+      (g) => (assignment[k] = g)
+    )
   );
-
+  ///searches for the respective results
+  let results = [];
+  Results.forEach((res) => {
+    res[subject] && results.push(res[subject]);
+  });
   return (
     <div className="grid">
       <Navbar />
