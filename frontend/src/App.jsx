@@ -19,25 +19,25 @@ function App() {
   }
   function Isadmin() {
     //to see it wwork go to sign-up and check techer then login
-    if (log && !admin) {
+    if (false) {
       return <Navigate to={"/student"} />;
     }
     return <Outlet />;
   }
   return (
     <Routes>
-      <Route path="/sign-up" element={<Sign_up />} />
+      <Route path='/sign-up' element={<Sign_up />} />
+      <Route path='/student' element={<Student />} />
+          <Route path='/admin' element={<Admin />} />
       <Route element={<Auth />}>
         <Route element={<Isadmin />}>
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/:sbj/:grade" element={<Ass />} />
-          <Route path="/admin/Students" element={<Stats />} />
-          <Route path="/admin/new-assignment" element={<Quize />} />
+          <Route path='/admin/:sbj/:grade' element={<Ass />} />
+          <Route path='/admin/Students' element={<Stats />} />
+          <Route path='/admin/new-assignment' element={<Quize />} />
         </Route>
-        <Route path="/student" element={<Student />} />
-        <Route path="/student/:sbj/:id" element={<Topic />} />
+        <Route path='/student/:sbj/:id' element={<Topic />} />
       </Route>
-      <Route path="*" element={<Sign_in />} />
+      <Route path='*' element={<Sign_in />} />
     </Routes>
   );
 }
