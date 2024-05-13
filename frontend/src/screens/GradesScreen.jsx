@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
-import profileAvatar from "../images/profile-avatar.png";
-import Navbar from "./Navbar";
+import React from 'react'
 
-const StudentDashboard = () => {
+const GradesScreen = () => {
   return (
     <div className='bg-indigo-300 min-h-screen flex-grow-1'>
-        <Navbar />
+      <Navbar />
       {/* Learning Progress Widget */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-8 mt-8'>
         <div className='col-span-1 bg-indigo-700 p-6 rounded-lg'>
@@ -61,7 +59,10 @@ const StudentDashboard = () => {
               <div className='bg-white text-bg-indigo-500 px-4 py-1 rounded-full inline-block'>
                 5 Subjects
               </div>
-              <Link to='/grade/1/subjects' className='bg-indigo-900 text-white px-4 py-1 rounded-full inline-block'>
+              <Link
+                to='/grade/1/subjects'
+                className='bg-indigo-900 text-white px-4 py-1 rounded-full inline-block'
+              >
                 View Subjects
               </Link>
             </div>
@@ -73,6 +74,6 @@ const StudentDashboard = () => {
       </div>
     </div>
   );
-};
+}
 
-export default StudentDashboard;
+export default GradesScreen

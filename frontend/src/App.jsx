@@ -9,6 +9,7 @@ import Stats from "./admin/Stats";
 import Ass from "./admin/assignment";
 import StudentDashboard from "./components/StudentDashboard";
 import GradeScreen from "./screens/GradeScreen";
+import GradesScreen from "./screens/GradesScreen";
 function App() {
   return (
     <>
@@ -19,7 +20,8 @@ function App() {
         <Route path='/admin/new-assignment' element={<Quize />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<SignIn />} />
-        <Route path='' element={<StudentDashboard />} />
+        <Route path='/' element={<StudentDashboard />} />
+        <Route path='/grades' element={<GradesScreen />} />
         <Route path='/student/:sbj' element={<Topic />} />
         <Route path='/student/:sbj/:id' element={<Quize />} />
         <Route path='/grade/:id/subjects' element={<GradeScreen />} />

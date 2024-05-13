@@ -8,7 +8,9 @@ const Navbar = () => {
         <Link to='/' className='text-white text-2xl font-bold'>eSoma</Link>
         <ul className='flex space-x-4 text-white'>
           <li>Subjects</li>
-          <li>Grades</li>
+          <li>
+            <Link to='/grades'>Grades</Link>
+          </li>
           <li>Logout</li>
         </ul>
       </div>
