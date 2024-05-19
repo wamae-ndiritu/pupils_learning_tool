@@ -29,63 +29,12 @@ const SubjectTopics = () => {
               </h2>
               <span className='mt-1 w-full flex justify-between'>
                 <h6 className='text-gray-600'>5 Quizes</h6>
-                <button className='bg-indigo-500 text-white px-2 py-1 rounded'>
+                <Link
+                  to='/grade/1/subjects/1/topics/1/quizes'
+                  className='bg-indigo-500 text-white px-2 py-1 rounded'
+                >
                   View Quizes
-                </button>
-              </span>
-            </span>
-          </div>
-          <div className='md:w-3/4 bg-white rounded p-2 flex gap-5 items-center mb-2'>
-            <img
-              src={mathsIcon}
-              alt='Maths'
-              className='h-20 w-20 rounded-full border-2 border-indigo-300 object-cover'
-            />
-            <span className='w-4/5'>
-              <h2 className='text-indigo-500 text-2xl font-semibold'>
-                Measurements
-              </h2>
-              <span className='mt-1 flex justify-between'>
-                <h6 className='text-gray-600'>10 Quizes</h6>
-                <button className='bg-indigo-500 text-white px-2 py-1 rounded'>
-                  View Quizes
-                </button>
-              </span>
-            </span>
-          </div>
-          <div className='md:w-3/4 bg-white rounded p-2 flex gap-5 items-center mb-2'>
-            <img
-              src={mathsIcon}
-              alt='Maths'
-              className='h-20 w-20 rounded-full border-2 border-indigo-300 object-cover'
-            />
-            <span className='w-4/5'>
-              <h2 className='text-indigo-500 text-2xl font-semibold'>
-                Numbers
-              </h2>
-              <span className='mt-1 flex justify-between'>
-                <h6 className='text-gray-600'>8 Quizes</h6>
-                <button className='bg-indigo-500 text-white px-2 py-1 rounded'>
-                  View Quizes
-                </button>
-              </span>
-            </span>
-          </div>
-          <div className='md:w-3/4 bg-white rounded p-2 flex gap-5 items-center mb-2'>
-            <img
-              src={mathsIcon}
-              alt='Maths'
-              className='h-20 w-20 rounded-full border-2 border-indigo-300 object-cover'
-            />
-            <span className='w-4/5'>
-              <h2 className='text-indigo-500 text-2xl font-semibold'>
-                Time
-              </h2>
-              <span className='mt-1 flex justify-between'>
-                <h6 className='text-gray-600'>11 Quizes</h6>
-                <button className='bg-indigo-500 text-white px-2 py-1 rounded'>
-                  View Quizes
-                </button>
+                </Link>
               </span>
             </span>
           </div>

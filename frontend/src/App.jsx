@@ -12,6 +12,8 @@ import GradeScreen from "./screens/GradeScreen";
 import GradesScreen from "./screens/GradesScreen";
 import SubjectTopics from "./screens/SubjectTopics";
 import SubjectScreen from "./screens/SubjectScreen";
+import QuizesScreen from "./screens/QuizesScreen";
+import QuizScreen from "./screens/QuizScreen";
 function App() {
   return (
     <>
@@ -25,13 +27,18 @@ function App() {
         <Route path='/' element={<StudentDashboard />} />
         <Route path='/grades' element={<GradesScreen />} />
         <Route
-          path='/grade/1/subjects/1/topics/1'
+          path='/grade/:gradeId/subjects/:subjectId/topics/:topicId'
           element={<SubjectTopics />}
         />
         <Route
-          path='/subjects'
-          element={<SubjectScreen />}
+          path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes'
+          element={<QuizesScreen />}
         />
+        <Route
+          path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes/:quizId'
+          element={<QuizScreen />}
+        />
+        <Route path='/subjects' element={<SubjectScreen />} />
         <Route path='/student/:sbj' element={<Topic />} />
         <Route path='/student/:sbj/:id' element={<Quize />} />
         <Route path='/grade/:id/subjects' element={<GradeScreen />} />
