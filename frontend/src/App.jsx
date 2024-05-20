@@ -14,6 +14,10 @@ import SubjectTopics from "./screens/SubjectTopics";
 import SubjectScreen from "./screens/SubjectScreen";
 import QuizesScreen from "./screens/QuizesScreen";
 import QuizScreen from "./screens/QuizScreen";
+import DashboardLayout from "./admin/Layout";
+import Dashboard from "./screens/admin/Dashboard";
+import ClassesScreen from "./screens/admin/ClassesScreen";
+import ProfileScreen from "./screens/admin/ProfileScreen";
 function App() {
   return (
     <>
@@ -42,6 +46,13 @@ function App() {
         <Route path='/student/:sbj' element={<Topic />} />
         <Route path='/student/:sbj/:id' element={<Quize />} />
         <Route path='/grade/:id/subjects' element={<GradeScreen />} />
+        {/* Admin */}
+        <Route element={<DashboardLayout />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/dashboard/classes' element={<ClassesScreen />} />
+          <Route path='/dashboard/profile' element={<ProfileScreen />} />
+        </Route>
+        {/* Admin */}
       </Routes>
     </>
   );
