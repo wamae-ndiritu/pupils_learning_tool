@@ -18,21 +18,6 @@ import Dashboard from "./screens/admin/Dashboard";
 import ClassesScreen from "./screens/admin/ClassesScreen";
 import ProfileScreen from "./screens/admin/ProfileScreen";
 function App() {
-  const log = useSelector(({ Session }) => Session.logged);
-  const admin = useSelector(({ Session }) => Session.isadmin);
-  function Auth() {
-    if (!log) {
-      return <Navigate to="/sign-in" />;
-    }
-    return <Outlet />;
-  }
-  function Isadmin() {
-    //to see it wwork go to sign-up and check techer then login
-    if (log && !admin) {
-      return <Navigate to={"/student"} />;
-    }
-    return <Outlet />;
-  }
   return (
     <>
       <Routes>
