@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { update, result } from "./slice";
+import { useParams } from "react-router-dom";
 let list = [];
 function checkAnswers(previousObject, updatedObject) {
   const changes = {};
@@ -37,15 +40,19 @@ function checkAnswers(previousObject, updatedObject) {
 
   return changes;
 }
-function Quize({ quiz }) {
+function Quize({ quiz, num }) {
+  const specs = useParams();
+  const dispatch = useDispatch();
+  const grade = useSelector(({ Student }) => Student.grade);
+  const admin_data = useSelector(({ Admin }) => Admin.admin_data);
   const [answer, setanswer] = useState({});
   function change(e) {
     switch (e.target.type) {
       case "text":
-        setanswer((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        setanswer((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
         break;
       case "radio":
-        setanswer((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        setanswer((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
         break;
       case "checkbox":
         if (e.target.checked) {
@@ -63,24 +70,41 @@ function Quize({ quiz }) {
   function submit() {
     if (Object.keys(answer).length < 1) return;
     const wrong_answers = checkAnswers(answer, true_answers);
-    const result = `${
+    const results = `${
       Object.keys(true_answers).length - Object.keys(wrong_answers).length
     }/${Object.keys(true_answers).length}`;
-    console.log(result);
+    dispatch(result({ [specs.id]: { quiz: num, mark: results } }));
+    //dispatch(result({ quiz: num, mark: results }));
+    let t = {
+      ...admin_data,
+      [specs.sbj]: {
+        ...admin_data[`${specs.sbj}`],
+        [grade]: {
+          ...admin_data[`${specs.sbj}`][`${grade}`],
+          [specs.id]: {
+            ...admin_data[specs.sbj][grade][specs.id],
+            [num]: [...admin_data[specs.sbj][grade][specs.id][num]],
+          },
+        },
+      },
+    };
+    delete t[specs.sbj][grade][specs.id][num];
+    dispatch(update(t));
   }
   return (
     <>
       <ol>
         {quiz.map((q) => (
           <li>
-            {q["question"]}({q.mark}mrk{q.mark > 1 ? "s" : null})
+            {q["question"]}({Number(q.mark)}mrk{Number(q.mark) > 1 ? "s" : null}
+            )
             <br />
             {q["multiple"] ? (
               q["multiple"].map((ans) => (
                 <>
                   {" "}
                   <input
-                    type={typeof q["answer"] == "string" ? "radio" : "checkbox"}
+                    type={q["answer"].length > 1 ? "checkbox" : "radio"}
                     name={`q${q.id}`}
                     value={ans}
                     onClick={(e) => change(e)}

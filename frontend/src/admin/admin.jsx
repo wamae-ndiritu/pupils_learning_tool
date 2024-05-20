@@ -1,9 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "./nav";
-import { admin_data, no_student, students, subject } from "../Mock_data";
+import Navbar from "../nav";
+import { no_student } from "../Mock_data";
+import { useDispatch, useSelector } from "react-redux";
+import { update } from "../slice";
 
 function Admin() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const admin_data = useSelector(({ Admin }) => Admin.admin_data);
+  function del(sub) {
+    let p = { ...admin_data };
+    delete p[`${sub}`];
+    dispatch(update(p));
+  }
 
   return (
     <div className="grid">
@@ -16,11 +25,15 @@ function Admin() {
           </div>
 
           <div>
-            <h3>{subject.length}</h3>
+            <h3>{Object.keys(admin_data).length}</h3>
             <p> subjects</p>
           </div>
           <div>
-            <h3>{Object.keys(students).length}</h3>
+            <h3>
+              {Object.keys(admin_data).map(
+                (p) => Object.keys(admin_data[p]).length
+              )[0] || 0}
+            </h3>
             <p> Grades</p>
           </div>
         </section>
@@ -41,11 +54,11 @@ function Admin() {
                 ))}
               </ol>
 
-              <button className="btn-cancel">delete subject</button>
+              <button className="btn-cancel" onClick={() => del(subject)}>
+                delete subject
+              </button>
             </div>
           ))}
-
-          <button className="btn">add subject</button>
         </section>
       </main>
     </div>

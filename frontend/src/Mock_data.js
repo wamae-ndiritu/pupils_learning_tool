@@ -1,277 +1,31 @@
-export const topics = {
-  Mathematics: ["indices", "loci"],
-  kiswahili: ["nomino", "ngeli"],
-};
 export const students = {
   Grade4: [
-    { name: "john gige", subject: "kiswahili", score: 20 },
-    { name: "john gige", subject: "kiswahili", score: 20 },
-    { name: "john gige", subject: "kiswahili", score: 20 },
-    { name: "john gige", subject: "kiswahili", score: 20 },
-    { name: "john gige", subject: "kiswahili", score: 20 },
+    { id: 1, name: "john gige", subject: "kiswahili", score: 20 },
+    { id: 2, name: "john gige", subject: "kiswahili", score: 20 },
+    { id: 3, name: "john gige", subject: "kiswahili", score: 20 },
+    { id: 4, name: "john gige", subject: "kiswahili", score: 20 },
+    { id: 5, name: "john gige", subject: "kiswahili", score: 20 },
   ],
 
-  Grade6: [{ name: "john gige", subject: "kiswahili", score: 22 }],
+  Grade6: [{ id: 1, name: "john gige", subject: "kiswahili", score: 22 }],
 
-  Grade8: [{ name: "john gige", subject: "kiswahili", score: 24 }],
+  Grade8: [{ id: 1, name: "john gige", subject: "kiswahili", score: 24 }],
 };
 let num = 0;
 Object.keys(students).map((i) => (num += Object.values(students[i]).length));
 export const no_student = num;
-export const topic = {
-  indices: {
-    quiz1: [
-      {
-        id: 1,
-        question: "what is the Name",
-        marks: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-      {
-        id: 2,
-        question: "what is the Name",
-        mark: 2,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: ["mark", "mathew"],
-      },
-      {
-        id: 3,
-        question: "what is the Name",
-        mark: 3,
-        answer: "name",
-      },
-      {
-        id: 4,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-    ],
-    quiz2: [
-      {
-        id: 1,
-        question: "what is the Name",
-        marks: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-      {
-        id: 2,
-        question: "what is the Name",
-        mark: 2,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: ["mark", "mathew"],
-      },
-      {
-        id: 3,
-        question: "what is the Name",
-        mark: 2,
-        answer: "name",
-      },
-      {
-        id: 4,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-    ],
-  },
-  loci: {
-    quiz1: [
-      {
-        id: 1,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-      {
-        id: 2,
-        question: "what is the Name",
-        mark: 2,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: ["mark", "mathew"],
-      },
-      {
-        id: 3,
-        question: "what is the Name",
-        mark: 2,
-        answer: "name",
-      },
-      {
-        id: 4,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-    ],
-    quiz2: [
-      {
-        id: 1,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-      {
-        id: 2,
-        question: "what is the Name",
-        mark: 2,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: ["mark", "mathew"],
-      },
-      {
-        id: 3,
-        question: "what is the Name",
-        mark: 2,
-        answer: "name",
-      },
-      {
-        id: 4,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-    ],
-  },
-  ngeli: {
-    quiz1: [
-      {
-        id: 1,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-      {
-        id: 2,
-        question: "what is the Name",
-        mark: 2,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: ["mark", "mathew"],
-      },
-      {
-        id: 3,
-        question: "what is the Name",
-        mark: 2,
-        answer: "name",
-      },
-      {
-        id: 4,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-    ],
-    quiz2: [
-      {
-        id: 1,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-      {
-        id: 2,
-        question: "what is the Name",
-        mark: 2,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: ["mark", "mathew"],
-      },
-      {
-        id: 3,
-        question: "what is the Name",
-        mark: 2,
-        answer: "name",
-      },
-      {
-        id: 4,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-    ],
-  },
-  nomino: {
-    quiz1: [
-      {
-        id: 1,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-      {
-        id: 2,
-        question: "what is the Name",
-        mark: 2,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: ["mark", "mathew"],
-      },
-      {
-        id: 3,
-        question: "what is the Name",
-        mark: 2,
-        answer: "name",
-      },
-      {
-        id: 4,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-    ],
-    quiz2: [
-      {
-        id: 1,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-      {
-        id: 2,
-        question: "what is the Name",
-        mark: 2,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: ["mark", "mathew"],
-      },
-      {
-        id: 3,
-        question: "what is the Name",
-        mark: 2,
-        answer: "name",
-      },
-      {
-        id: 4,
-        question: "what is the Name",
-        mark: 1,
-        multiple: ["john", "mark", "mathew", "bill"],
-        answer: "mark",
-      },
-    ],
-  },
-};
 
 export const admin_data = {
   mathematics: {
-    Grade6: {
+    Grade4: {
       indices: {
         quiz1: [
           {
             id: 1,
             question: "what is the Name",
-            marks: 1,
+            mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
           {
             id: 2,
@@ -284,23 +38,23 @@ export const admin_data = {
             id: 3,
             question: "what is the Name",
             mark: 3,
-            answer: "name",
+            answer: ["name"],
           },
           {
             id: 4,
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
         ],
         quiz2: [
           {
             id: 1,
             question: "what is the Name",
-            marks: 1,
+            mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
           {
             id: 2,
@@ -313,14 +67,14 @@ export const admin_data = {
             id: 3,
             question: "what is the Name",
             mark: 2,
-            answer: "name",
+            answer: ["name"],
           },
           {
             id: 4,
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
         ],
       },
@@ -331,7 +85,7 @@ export const admin_data = {
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
           {
             id: 2,
@@ -344,14 +98,14 @@ export const admin_data = {
             id: 3,
             question: "what is the Name",
             mark: 2,
-            answer: "name",
+            answer: ["name"],
           },
           {
             id: 4,
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
         ],
       },
@@ -364,7 +118,7 @@ export const admin_data = {
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
           {
             id: 2,
@@ -377,14 +131,14 @@ export const admin_data = {
             id: 3,
             question: "what is the Name",
             mark: 2,
-            answer: "name",
+            answer: ["name"],
           },
           {
             id: 4,
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
         ],
         quiz2: [
@@ -393,7 +147,7 @@ export const admin_data = {
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
           {
             id: 2,
@@ -406,14 +160,14 @@ export const admin_data = {
             id: 3,
             question: "what is the Name",
             mark: 2,
-            answer: "name",
+            answer: ["name"],
           },
           {
             id: 4,
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
         ],
       },
@@ -428,7 +182,7 @@ export const admin_data = {
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
           {
             id: 2,
@@ -441,14 +195,14 @@ export const admin_data = {
             id: 3,
             question: "what is the Name",
             mark: 2,
-            answer: "name",
+            answer: ["name"],
           },
           {
             id: 4,
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mathew",
+            answer: ["mathew"],
           },
         ],
         quiz2: [
@@ -457,7 +211,7 @@ export const admin_data = {
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
           },
           {
             id: 2,
@@ -470,19 +224,79 @@ export const admin_data = {
             id: 3,
             question: "what is the Name",
             mark: 2,
-            answer: "name",
+            answer: ["name"],
           },
           {
             id: 4,
             question: "what is the Name",
             mark: 1,
             multiple: ["john", "mark", "mathew", "bill"],
-            answer: "mark",
+            answer: ["mark"],
+          },
+        ],
+      },
+    },
+    Grade8: {
+      ngeli: {
+        quiz1: [
+          {
+            id: 1,
+            question: "what is the Name",
+            mark: 1,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: ["mark"],
+          },
+          {
+            id: 2,
+            question: "what is the Name",
+            mark: 2,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: ["mark", "mathew"],
+          },
+          {
+            id: 3,
+            question: "what is the Name",
+            mark: 2,
+            answer: ["name"],
+          },
+          {
+            id: 4,
+            question: "what is the Name",
+            mark: 1,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: ["mathew"],
+          },
+        ],
+        quiz2: [
+          {
+            id: 1,
+            question: "what is the Name",
+            mark: 1,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: ["mark"],
+          },
+          {
+            id: 2,
+            question: "what is the Name",
+            mark: 2,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: ["mark", "mathew"],
+          },
+          {
+            id: 3,
+            question: "what is the Name",
+            mark: 2,
+            answer: ["name"],
+          },
+          {
+            id: 4,
+            question: "what is the Name",
+            mark: 1,
+            multiple: ["john", "mark", "mathew", "bill"],
+            answer: ["mark"],
           },
         ],
       },
     },
   },
 };
-
-export const subject = Object.keys(admin_data);
