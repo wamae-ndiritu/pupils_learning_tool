@@ -1,44 +1,59 @@
-import { Navigate, Outlet, Route, Router, Routes } from "react-router-dom";
-import Sign_up from "./signup";
-import Sign_in from "./Login";
-import Student from "./student_page";
+import { Route, Routes } from "react-router-dom";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 import Topic from "./subject";
 import Quize from "./admin/add_quiz";
 import Admin from "./admin/admin";
 import Stats from "./admin/Stats";
 import Ass from "./admin/assignment";
-import { useSelector } from "react-redux";
+import StudentDashboard from "./components/StudentDashboard";
+import GradeScreen from "./screens/GradeScreen";
+import GradesScreen from "./screens/GradesScreen";
+import SubjectTopics from "./screens/SubjectTopics";
+import SubjectScreen from "./screens/SubjectScreen";
+import QuizesScreen from "./screens/QuizesScreen";
+import QuizScreen from "./screens/QuizScreen";
+import DashboardLayout from "./admin/Layout";
+import Dashboard from "./screens/admin/Dashboard";
+import ClassesScreen from "./screens/admin/ClassesScreen";
+import ProfileScreen from "./screens/admin/ProfileScreen";
 function App() {
-  const log = useSelector(({ Session }) => Session.logged);
-  const admin = useSelector(({ Session }) => Session.isadmin);
-  function Auth() {
-    if (!log) {
-      return <Navigate to="/sign-in" />;
-    }
-    return <Outlet />;
-  }
-  function Isadmin() {
-    //to see it wwork go to sign-up and check techer then login
-    if (log && !admin) {
-      return <Navigate to={"/student"} />;
-    }
-    return <Outlet />;
-  }
   return (
-    <Routes>
-      <Route path="/sign-up" element={<Sign_up />} />
-      <Route element={<Auth />}>
-        <Route element={<Isadmin />}>
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/:sbj/:grade" element={<Ass />} />
-          <Route path="/admin/Students" element={<Stats />} />
-          <Route path="/admin/new-assignment" element={<Quize />} />
+    <>
+      <Routes>
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/admin/:sbj/:grade' element={<Ass />} />
+        <Route path='/admin/Students' element={<Stats />} />
+        <Route path='/admin/new-assignment' element={<Quize />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/sign-in' element={<SignIn />} />
+        <Route path='/' element={<StudentDashboard />} />
+        <Route path='/grades' element={<GradesScreen />} />
+        <Route
+          path='/grade/:gradeId/subjects/:subjectId/topics/:topicId'
+          element={<SubjectTopics />}
+        />
+        <Route
+          path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes'
+          element={<QuizesScreen />}
+        />
+        <Route
+          path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes/:quizId'
+          element={<QuizScreen />}
+        />
+        <Route path='/subjects' element={<SubjectScreen />} />
+        <Route path='/student/:sbj' element={<Topic />} />
+        <Route path='/student/:sbj/:id' element={<Quize />} />
+        <Route path='/grade/:id/subjects' element={<GradeScreen />} />
+        {/* Admin */}
+        <Route element={<DashboardLayout />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/dashboard/classes' element={<ClassesScreen />} />
+          <Route path='/dashboard/profile' element={<ProfileScreen />} />
         </Route>
-        <Route path="/student" element={<Student />} />
-        <Route path="/student/:sbj/:id" element={<Topic />} />
-      </Route>
-      <Route path="*" element={<Sign_in />} />
-    </Routes>
+        {/* Admin */}
+      </Routes>
+    </>
   );
 }
 export default App;
