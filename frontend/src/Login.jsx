@@ -17,31 +17,29 @@ const Sign_in = () => {
       <main className="card-log">
         <h1> Welcome </h1>
         <section>
-          <section>
-            <span>
-              email
-              <br />
-              <input
-                type="email"
-                onChange={(e) =>
-                  setUser((p) => ({ ...p, email: e.target.value }))
-                }
-                value={user.email}
-              />
-            </span>
+          <span>
+            email
             <br />
-            <span>
-              password
-              <br />
-              <input
-                type="password"
-                onChange={(e) =>
-                  setUser((p) => ({ ...p, password: e.target.value }))
-                }
-                value={user.password}
-              />
-            </span>
-          </section>
+            <input
+              type="email"
+              onChange={(e) =>
+                setUser((p) => ({ ...p, email: e.target.value }))
+              }
+              value={user.email}
+            />
+          </span>
+          <br />
+          <span>
+            password
+            <br />
+            <input
+              type="password"
+              onChange={(e) =>
+                setUser((p) => ({ ...p, password: e.target.value }))
+              }
+              value={user.password}
+            />
+          </span>
 
           <button onClick={submit}>Submit</button>
 

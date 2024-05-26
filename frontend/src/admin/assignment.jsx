@@ -19,9 +19,8 @@ function Ass() {
       subject: grade.sbj,
       grade: grade.grade,
       topic: top,
-      quiz: locol[top][q],
+      quiz: [q, locol[top][q]],
     };
-
     dispath(edit(data));
     navigate("/admin/new-assignment");
   }
@@ -80,20 +79,14 @@ function Ass() {
                               {" "}
                               <input
                                 type={
-                                  typeof q["answer"] == "string"
-                                    ? "radio"
-                                    : "checkbox"
+                                  q["answer"].length > 1 ? "checkbox" : "radio"
                                 }
                               />
                               {ans}
                             </>
                           ))
                         ) : (
-                          <input
-                            type="text"
-                            name={`q${q.id}`}
-                            onChange={(e) => change(e)}
-                          />
+                          <input type="text" name={`q${q.id}`} />
                         )}
                         <p>answer = {`[${q.answer}]`}</p>
                       </li>

@@ -18,27 +18,31 @@ const admin = createSlice({
       state.admin_data = payload;
     },
     newass: (state, { payload }) => {
-      const { assignment, val, l, present } = payload;
-      if (present[val[0]]) {
-        if (present[val[0]][val[1]]) {
-          if (present[val[0]][val[1]][val[2]]) {
-            state.admin_data[val[0]][val[1]][val[2]][`quiz${l && 1}`] = [
-              ...assignment[val[0]][val[1]][val[2]].quiz,
-            ];
+      if (payload) {
+        const { assignment, val, l, present } = payload;
+        if (present[val[0]]) {
+          if (present[val[0]][val[1]]) {
+            if (present[val[0]][val[1]][val[2]]) {
+              state.admin_data[val[0]][val[1]][val[2]][l] = [
+                ...assignment[val[0]][val[1]][val[2]][l],
+              ];
+            } else {
+              state.admin_data[val[0]][val[1]][
+                Object.keys(assignment[val[0]][val[1]])[0]
+              ] = { ...assignment[val[0]][val[1]][val[2]] };
+            }
           } else {
-            state.admin_data[val[0]][val[1]][
-              Object.keys(assignment[val[0]][val[1]])[0]
-            ] = { ...assignment[val[0]][val[1]][val[2]] };
+            state.admin_data[val[0]][Object.keys(assignment[val[0]])[0]] = {
+              ...assignment[val[0]][val[1]],
+            };
           }
         } else {
-          state.admin_data[val[0]][Object.keys(assignment[val[0]])[0]] = {
-            ...assignment[val[0]][val[1]],
+          state.admin_data[Object.keys(assignment)[0]] = {
+            ...assignment[val[0]],
           };
         }
       } else {
-        state.admin_data[Object.keys(assignment)[0]] = {
-          ...assignment[val[0]],
-        };
+        state.edit = payload;
       }
     },
   },
