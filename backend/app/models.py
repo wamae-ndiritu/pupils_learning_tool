@@ -83,7 +83,7 @@ class Student(models.Model):
     def __str__(self):
         return self.reg_no
 
-class Grade(models.model):
+class Grade(models.Model):
     grade_no = models.IntegerField(unique=True)
     
     def  __str__(self):
