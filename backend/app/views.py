@@ -6,8 +6,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import CustomUser
 from .serializers import CustomUserSerializer, StudentSerializer
 
-
-
 # Register user
 @api_view(['POST'])
 def register_user(request):
