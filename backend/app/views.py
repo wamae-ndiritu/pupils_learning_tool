@@ -10,6 +10,7 @@ from rest_framework import viewsets
 # Register user
 @api_view(['POST'])
 def register_user(request):
+    print(request.data)
     serializer = CustomUserSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save(user_type='student')
