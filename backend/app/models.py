@@ -82,3 +82,47 @@ class Student(models.Model):
 
     def __str__(self):
         return self.reg_no
+
+class Grade(models.Model):
+    grade_no = models.IntegerField(unique=True)
+    
+    def  __str__(self):
+        return f"Grade {self.grade_no}"
+
+class Subject(models.Model):
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    image_url = models.URLField()
+    description = models.TextField()
+    
+    def __str__(self):
+        return self.title
+
+class Topic(models.Model):
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    
+    def __str__(self):
+        return self.title
+
+class Quiz(models.Model):
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"Quiz on {self.topic.title}"
+
+class Question(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    content = models.TextField()
+    
+    def __str__(self):
+        return self.content
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    content = models.CharField(max_length=255)
+    is_correct = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.content

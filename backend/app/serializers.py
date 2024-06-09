@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Student
+from .models import CustomUser, Student, Grade, Subject, Topic, Quiz, Question, Answer
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -22,3 +22,33 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ['user']
+
+class GradeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Grade
+        fields = ['grade_no']
+
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = ['grade', 'title', 'image_url', 'description']
+
+class TopicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Topic
+        fields = ['subject', 'title', 'description']
+
+class QuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = ['topic']
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ['quiz', 'content']
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ['question', 'content', 'is_correct']
