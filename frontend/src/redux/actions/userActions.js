@@ -4,6 +4,7 @@ import {
   userActionStart,
   userLoginSuccess,
   userRegisterSuccess,
+  clearUserState
 } from "../slices/userSlices";
 import axios from "redaxios";
 

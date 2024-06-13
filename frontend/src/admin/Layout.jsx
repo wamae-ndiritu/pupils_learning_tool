@@ -1,11 +1,10 @@
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar";
 import { Outlet, Navigate } from "react-router-dom";
 
 export default function DashboardLayout() {
-//   const { userInfo } = useSelector((state) => state.user);
-const userInfo = true;
-  if (userInfo) {
+  const { userInfo } = useSelector((state) => state.user);
+  if (userInfo?.token?.access) {
     return (
       <div className='flex h-screen overflow-hidden'>
         <Sidebar />

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Outlet, Navigate } from "react-router-dom";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Topic from "./subject";
@@ -17,6 +17,15 @@ import DashboardLayout from "./admin/Layout";
 import Dashboard from "./screens/admin/Dashboard";
 import ClassesScreen from "./screens/admin/ClassesScreen";
 import ProfileScreen from "./screens/admin/ProfileScreen";
+import { useSelector } from "react-redux";
+
+const ProtectedLayout = () => {
+  const { userInfo } = useSelector((state) => state.user);
+  if (userInfo?.token?.access) {
+    return <Outlet />;
+  }
+  return <Navigate to='/sign-in' />;
+};
 function App() {
   return (
     <>
@@ -27,24 +36,27 @@ function App() {
         <Route path='/admin/new-assignment' element={<Quize />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<SignIn />} />
-        <Route path='/' element={<StudentDashboard />} />
-        <Route path='/grades' element={<GradesScreen />} />
-        <Route
-          path='/grade/:gradeId/subjects/:subjectId/topics/:topicId'
-          element={<SubjectTopics />}
-        />
-        <Route
-          path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes'
-          element={<QuizesScreen />}
-        />
-        <Route
-          path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes/:quizId'
-          element={<QuizScreen />}
-        />
+        <Route element={<ProtectedLayout />}>
+          <Route path='/' element={<StudentDashboard />} />
+          <Route path='/grades' element={<GradesScreen />} />
+          <Route path='/grade/:id/subjects' element={<GradeScreen />} />
+          <Route
+            path='/grade/:gradeId/subjects/:subjectId/topics/:topicId'
+            element={<SubjectTopics />}
+          />
+          <Route
+            path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes'
+            element={<QuizesScreen />}
+          />
+          <Route
+            path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes/:quizId'
+            element={<QuizScreen />}
+          />
+        </Route>
         <Route path='/subjects' element={<SubjectScreen />} />
         <Route path='/student/:sbj' element={<Topic />} />
         <Route path='/student/:sbj/:id' element={<Quize />} />
-        <Route path='/grade/:id/subjects' element={<GradeScreen />} />
+
         {/* Admin */}
         <Route element={<DashboardLayout />}>
           <Route path='/dashboard' element={<Dashboard />} />
