@@ -20,6 +20,8 @@ const Navbar = () => {
             <Link to='/grades'>Grades</Link>
           </li>
           {userInfo?.token?.access ? (
+            <>
+              <li className='text-xl font-semibold'>Hi, {userInfo?.user?.username}</li>
               <li>
                 <button
                   className='bg-indigo-500 px-2 py-1 rounded text-center flex items-center cursor-pointer'
@@ -28,6 +30,7 @@ const Navbar = () => {
                   Logout
                 </button>
               </li>
+            </>
           ) : (
             <>
               {" "}

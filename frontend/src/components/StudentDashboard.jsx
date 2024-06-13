@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import profileAvatar from "../images/profile-avatar.png";
 import Navbar from "./Navbar";
+import { useSelector } from "react-redux";
 
 const StudentDashboard = () => {
+  const {userInfo} = useSelector((state) => state.user);
   return (
     <div className='bg-indigo-300 min-h-screen flex-grow-1'>
-        <Navbar />
+      <Navbar />
       {/* Learning Progress Widget */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-8 mt-8'>
         <div className='col-span-1 bg-indigo-700 p-6 rounded-lg'>
@@ -20,8 +22,10 @@ const StudentDashboard = () => {
           </div>
           {/* Second row for student's information */}
           <div className='text-white'>
-            <h2 className='text-lg font-semibold mb-2'>John Doe</h2>
-            <p>johndoe@example.com</p>
+            <h2 className='text-xl font-semibold mb-2 capitalize'>
+              {userInfo?.user?.full_name || userInfo?.user?.username}
+            </h2>
+            <p>{userInfo?.user?.email}</p>
           </div>
         </div>
         <div className='col-span-1 bg-indigo-700 p-6 rounded-lg'>
@@ -61,7 +65,10 @@ const StudentDashboard = () => {
               <div className='bg-white text-bg-indigo-500 px-4 py-1 rounded-full inline-block'>
                 5 Subjects
               </div>
-              <Link to='/grade/1/subjects' className='bg-indigo-900 text-white px-4 py-1 rounded-full inline-block'>
+              <Link
+                to='/grade/1/subjects'
+                className='bg-indigo-900 text-white px-4 py-1 rounded-full inline-block'
+              >
                 View Subjects
               </Link>
             </div>
