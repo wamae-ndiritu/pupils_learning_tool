@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 import profileAvatar from "../images/profile-avatar.png";
 import Navbar from "./Navbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { listGradesClasses } from "../redux/actions/gradeActions";
+
 
 const StudentDashboard = () => {
+  const dispatch = useDispatch();
   const {userInfo} = useSelector((state) => state.user);
+  const {gradesList} = useSelector((state) => state.grade);
+
+  useEffect(() => {
+    dispatch(listGradesClasses());
+  }, [])
+
   return (
     <div className='bg-indigo-300 min-h-screen flex-grow-1'>
       <Navbar />
@@ -59,23 +69,34 @@ const StudentDashboard = () => {
         </h2>
         {/* Grade/Class Cards */}
         <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
-          <div className='col-span-1 bg-indigo-700 p-6 rounded-lg'>
-            <h3 className='text-lg font-semibold text-white mb-2'>Grade 1</h3>
-            <div className='flex justify-between items-center'>
-              <div className='bg-white text-bg-indigo-500 px-4 py-1 rounded-full inline-block'>
-                5 Subjects
-              </div>
-              <Link
-                to='/grade/1/subjects'
-                className='bg-indigo-900 text-white px-4 py-1 rounded-full inline-block'
+         {
+          gradesList.map((grade) => {
+            return (
+              <div
+                className='col-span-1 bg-indigo-700 p-6 rounded-lg'
+                key={grade.grade_no}
               >
-                View Subjects
-              </Link>
-            </div>
-            <p className='text-white mt-2'>
-              An elementary level in your education.
-            </p>
-          </div>
+                <h3 className='text-lg font-semibold text-white mb-2'>
+                  Grade {grade.grade_no}
+                </h3>
+                <div className='flex justify-between items-center'>
+                  <div className='bg-white text-bg-indigo-500 px-4 py-1 rounded-full inline-block'>
+                    5 Subjects
+                  </div>
+                  <Link
+                    to={`/grade/${grade.grade_no}/subjects`}
+                    className='bg-indigo-900 text-white px-4 py-1 rounded-full inline-block'
+                  >
+                    View Subjects
+                  </Link>
+                </div>
+                <p className='text-white mt-2'>
+                  An elementary level in your education.
+                </p>
+              </div>
+            );
+          })
+         }
         </div>
       </div>
     </div>
