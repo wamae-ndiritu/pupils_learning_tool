@@ -28,7 +28,7 @@ const Navbar = () => {
               to='/sign-in'
               className='bg-indigo-500 px-2 py-1 rounded text-center flex items-center'
             >
-              Sign Up
+              Sign In              
             </Link>
           </li>
         </ul>
