@@ -81,7 +81,7 @@ class Student(models.Model):
         CustomUser, on_delete=models.CASCADE)  # Relationship
 
     def __str__(self):
-        return self.reg_no
+        return self.user.username
 
 class Grade(models.Model):
     grade_no = models.IntegerField(unique=True)
