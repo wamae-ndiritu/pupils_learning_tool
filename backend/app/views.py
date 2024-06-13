@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.decorators import action
 from .models import CustomUser, Grade, Student, Subject, Topic, Question, Quiz, Answer
 from .serializers import CustomUserSerializer, StudentSerializer, GradeSerializer, SubjectSerializer, TopicSerializer, QuestionSerializer, QuizSerializer, AnswerSerializer 
 from rest_framework import viewsets
@@ -75,6 +76,22 @@ class GradeViewSet(viewsets.ModelViewSet):
     queryset = Grade.objects.all()
     serializer_class = GradeSerializer
     permission_classes = [IsAuthenticated]
+
+    @action(detail=False, methods=['get'], url_path='subjects/(?P<grade_no>[^/.]+)')
+    def get_subjects(self, request, grade_no=None):
+        # Get the grade object
+        try:
+            grade = Grade.objects.get(grade_no=grade_no)
+        except Grade.DoesNotExist:
+            return Response({'error': 'Grade not found'}, status=404)
+
+        # Get all subjects for this grade
+        # Assuming there is a reverse relation `subject_set`
+        subjects = grade.subject_set.all()
+
+        # Serialize the subjects
+        serializer = SubjectSerializer(subjects, many=True)
+        return Response(serializer.data)
 
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all()

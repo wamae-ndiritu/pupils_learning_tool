@@ -31,7 +31,7 @@ class GradeSerializer(serializers.ModelSerializer):
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
-        fields = ['grade', 'title', 'image_url', 'description']
+        fields = ['id', 'grade', 'title', 'image_url', 'description']
 
 class TopicSerializer(serializers.ModelSerializer):
     class Meta:

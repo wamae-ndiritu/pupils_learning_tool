@@ -41,7 +41,7 @@ function App() {
           <Route path='/grades' element={<GradesScreen />} />
           <Route path='/grade/:id/subjects' element={<GradeScreen />} />
           <Route
-            path='/grade/:gradeId/subjects/:subjectId/topics/:topicId'
+            path='/grade/:gradeId/subjects/:subjectId/topics'
             element={<SubjectTopics />}
           />
           <Route
