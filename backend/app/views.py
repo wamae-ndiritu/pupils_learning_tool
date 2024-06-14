@@ -98,6 +98,21 @@ class SubjectViewSet(viewsets.ModelViewSet):
     serializer_class = SubjectSerializer
     permission_classes = [IsAuthenticated]
 
+    @action(detail=False, methods=['get'], url_path='topics/(?P<subject_id>[^/.]+)')
+    def get_topics(self, request, subject_id=None):
+        try:
+            subject = Subject.objects.get(id=subject_id)
+        except Subject.DoesNotExist:
+            return Response({'error': 'Subject not found'}, status=404)
+
+        # Assuming there is a reverse relation `topic_set`
+        topics = subject.topic_set.all()
+        serializer = TopicSerializer(topics, many=True)
+        return Response({
+            'topic_count': topics.count(),
+            'topics': serializer.data
+        })
+
 class TopicViewSet(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer

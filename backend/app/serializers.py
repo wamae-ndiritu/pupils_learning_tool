@@ -24,19 +24,32 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = ['user']
 
 class GradeSerializer(serializers.ModelSerializer):
+    subject_count = serializers.SerializerMethodField()
     class Meta:
         model = Grade
-        fields = ['grade_no']
+        fields = ['grade_no', 'subject_count']
+    
+    def get_subject_count(self, obj):
+        return obj.subject_set.count()
 
 class SubjectSerializer(serializers.ModelSerializer):
+    topic_count = serializers.SerializerMethodField()
     class Meta:
         model = Subject
-        fields = ['id', 'grade', 'title', 'image_url', 'description']
+        fields = ['id', 'grade', 'title', 'image_url', 'description', 'topic_count']
+
+    def get_topic_count(self, obj):
+        return obj.topic_set.count()
 
 class TopicSerializer(serializers.ModelSerializer):
+    quiz_count = serializers.SerializerMethodField()
     class Meta:
         model = Topic
-        fields = ['subject', 'title', 'description']
+        fields = ['subject', 'title', 'description', 'quiz_count']
+
+    def get_quiz_count(self, obj):
+        return obj.quiz_set.count()
+
 
 class QuizSerializer(serializers.ModelSerializer):
     class Meta:

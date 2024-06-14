@@ -80,9 +80,15 @@ const StudentDashboard = () => {
                   Grade {grade.grade_no}
                 </h3>
                 <div className='flex justify-between items-center'>
-                  <div className='bg-white text-bg-indigo-500 px-4 py-1 rounded-full inline-block'>
-                    5 Subjects
-                  </div>
+                  {grade.subject_count > 0 ? (
+                    <div className='bg-white text-bg-indigo-500 px-4 py-1 rounded-full inline-block'>
+                      {grade.subject_count} Subjects
+                    </div>
+                  ) : (
+                    <div className='bg-white text-red-300 px-4 py-1 rounded-full inline-block'>
+                      No Subjects
+                    </div>
+                  )}
                   <Link
                     to={`/grade/${grade.grade_no}/subjects`}
                     className='bg-indigo-900 text-white px-4 py-1 rounded-full inline-block'

@@ -96,7 +96,7 @@ class Subject(models.Model):
     description = models.TextField()
     
     def __str__(self):
-        return self.title
+        return f"{self.grade} - {self.title}"
 
 class Topic(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
@@ -104,7 +104,7 @@ class Topic(models.Model):
     description = models.TextField()
     
     def __str__(self):
-        return self.title
+        return f"{self.title}"
 
 class Quiz(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)

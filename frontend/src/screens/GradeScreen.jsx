@@ -21,8 +21,6 @@ const GradeScreen = () => {
       dispatch(listGradesSubjects(gradeId));
     }
   }, [gradeId])
-
-  console.log(gradeSubjectsList)
   return (
     <div className='bg-gray-200 flex-grow-1'>
       <Navbar />
@@ -34,7 +32,7 @@ const GradeScreen = () => {
       </p>
       <div className='grid grid-cols-2 grid-cols-5 gap-5 mx-8 py-6'>
         {
-          gradeSubjectsList.map((subject) => {
+          gradeSubjectsList?.map((subject) => {
             return (
               <div className='col-span-1 bg-white p-1 shadow' key={subject.id}>
                 <img
@@ -44,7 +42,11 @@ const GradeScreen = () => {
                 />
                 <div className='w-full px-4 my-2'>
                   <h2>{subject.title}</h2>
-                  <p className='text-gray-600'>20 Topics</p>
+                  {subject.topic_count > 0 && (
+                    <p className='text-gray-600'>
+                      {subject.topic_count} Topics
+                    </p>
+                  )}
                   <button className='bg-indigo-700 text-white px-4 py-1 h-8 rounded w-full my-2 relative'>
                     <Link
                       to={`/grade/${subject.grade}/subjects/${subject.id}/topics`}
