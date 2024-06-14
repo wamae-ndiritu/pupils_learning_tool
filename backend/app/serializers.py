@@ -45,16 +45,21 @@ class TopicSerializer(serializers.ModelSerializer):
     quiz_count = serializers.SerializerMethodField()
     class Meta:
         model = Topic
-        fields = ['subject', 'title', 'description', 'quiz_count']
+        fields = ['id', 'subject', 'title', 'description', 'quiz_count']
 
     def get_quiz_count(self, obj):
         return obj.quiz_set.count()
 
 
 class QuizSerializer(serializers.ModelSerializer):
+    question_count = serializers.SerializerMethodField()
     class Meta:
         model = Quiz
-        fields = ['topic']
+        fields = ['topic', 'id', 'question_count']
+    
+    def get_question_count(self, obj):
+        return obj.question_set.count()
+
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
