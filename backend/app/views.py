@@ -140,6 +140,23 @@ class QuizViewSet(viewsets.ModelViewSet):
     serializer_class = QuizSerializer
     permission_classes = [IsAuthenticated]
 
+    @action(detail=False, methods=['get'], url_path='questions/(?P<quiz_id>[^/.]+)')
+    def get_questions(self, request, quiz_id=None):
+        try:
+            quiz = Quiz.objects.get(id=quiz_id)
+        except Quiz.DoesNotExist:
+            return Response({'error': 'Quiz not found'}, status=404)
+
+        questions = quiz.question_set.all()
+        serializer = QuestionSerializer(questions, many=True)
+        return Response({
+            'quiz': quiz.id,
+            'topic': quiz.topic.title,
+            'subject': quiz.topic.subject.title,
+            'question_count': questions.count(),
+            'questions': serializer.data
+        })
+
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer

@@ -59,14 +59,17 @@ class QuizSerializer(serializers.ModelSerializer):
     
     def get_question_count(self, obj):
         return obj.question_set.count()
-
-
-class QuestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Question
-        fields = ['quiz', 'content']
+    
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ['question', 'content', 'is_correct']
+        fields = ['id', 'question', 'content', 'is_correct']
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    answers = AnswerSerializer(many=True, read_only=True, source='answer_set')
+    class Meta:
+        model = Question
+        fields = ['id', 'quiz', 'content', 'answers']
+

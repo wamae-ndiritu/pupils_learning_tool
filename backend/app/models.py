@@ -110,7 +110,7 @@ class Quiz(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"Quiz on {self.topic.title}"
+        return f"Quiz {self.id} on {self.topic.title}"
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)

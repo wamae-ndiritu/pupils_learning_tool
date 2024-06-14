@@ -50,7 +50,9 @@ const SubjectTopics = () => {
                   </h2>
                   <span className='mt-1 w-full flex justify-between'>
                     {topic?.quiz_count > 0 ? (
-                      <h6 className='text-gray-600'>{quiz.quiz_count} Quizes</h6>
+                      <h6 className='text-gray-600'>
+                        {subjectTopicsData?.quiz_count} Quizes
+                      </h6>
                     ) : (
                       <h6 className='text-red-300'>No Quizes</h6>
                     )}
