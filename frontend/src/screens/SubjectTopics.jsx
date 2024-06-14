@@ -57,7 +57,7 @@ const SubjectTopics = () => {
                       <h6 className='text-red-300'>No Quizes</h6>
                     )}
                     <Link
-                      to='/grade/1/subjects/1/topics/1/quizes'
+                      to={`/grade/${gradeId}/subjects/${subjectId}/topics/${topic.id}/quizes`}
                       className='bg-indigo-500 text-white px-2 py-1 rounded'
                     >
                       View Quizes

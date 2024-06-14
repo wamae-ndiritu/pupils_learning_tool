@@ -8,6 +8,9 @@ const initialState = {
   subjectTopicsData: {},
   topicQuizsData: {},
   quizData: {},
+  quizScores: {},
+  attempts: [],
+  reviewData: {},
   error: false,
 };
 
@@ -45,6 +48,18 @@ export const gradeSlice = createSlice({
     getQuizDataSuccess: (state, action) => {
       state.loading = false;
       state.quizData = action.payload;
+    },
+    submitQuizSuccess: (state, action) => {
+      state.loading = false;
+      state.quizScores = action.payload;
+    },
+    getAttemptsSuccess: (state, action) => {
+      state.loading = false;
+      state.attempts = action.payload;
+    },
+    reviewQuizSuccess: (state, action) => {
+      state.loading = false;
+      state.reviewData = action.payload;
     }
   },
 });
@@ -57,7 +72,10 @@ export const {
     getGradeSubjectsSuccess,
     getSubjectTopicsSuccess,
     getTopicQuizsSuccess,
-    getQuizDataSuccess
+    getQuizDataSuccess,
+    submitQuizSuccess,
+    getAttemptsSuccess,
+    reviewQuizSuccess
 } = gradeSlice.actions;
 
 export default gradeSlice.reducer;

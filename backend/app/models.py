@@ -126,3 +126,30 @@ class Answer(models.Model):
     
     def __str__(self):
         return self.content
+    
+
+class StudentQuizResult(models.Model):
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    correct_answers = models.IntegerField()
+    total_questions = models.IntegerField()
+    score = models.FloatField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.student.user.username} - {self.quiz.title} - {self.score}%"
+
+    class Meta:
+        unique_together = ('student', 'quiz')
+
+# app/models.py
+
+
+class StudentAnswer(models.Model):
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    selected_answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    is_correct = models.BooleanField()
+
+    def __str__(self):
+        return f"{self.student.username}'s answer to {self.question.content}"

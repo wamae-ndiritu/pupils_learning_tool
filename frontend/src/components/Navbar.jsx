@@ -14,14 +14,23 @@ const Navbar = () => {
         </Link>
         <ul className='flex items-center space-x-4 text-white'>
           <li>
-            <Link to='/subjects'>Subjects</Link>
+            <Link to='/'>Home</Link>
           </li>
           <li>
-            <Link to='/grades'>Grades</Link>
+            <Link to='/quizzes/my-attempts'>My Quizzes</Link>
+          </li>
+          <li>
+            <a
+              href='http://127.0.0.1:8000/admin'
+              target='_blank'
+              rel='noopener noreferrer'
+            >Admin Dashboard</a>
           </li>
           {userInfo?.token?.access ? (
             <>
-              <li className='text-xl font-semibold'>Hi, {userInfo?.user?.username}</li>
+              <li className='text-xl font-semibold'>
+                Hi, {userInfo?.user?.username}
+              </li>
               <li>
                 <button
                   className='bg-indigo-500 px-2 py-1 rounded text-center flex items-center cursor-pointer'

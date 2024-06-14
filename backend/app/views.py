@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import action
-from .models import CustomUser, Grade, Student, Subject, Topic, Question, Quiz, Answer
-from .serializers import CustomUserSerializer, StudentSerializer, GradeSerializer, SubjectSerializer, TopicSerializer, QuestionSerializer, QuizSerializer, AnswerSerializer 
+from .models import CustomUser, Grade, Student, Subject, Topic, Question, Quiz, Answer, StudentQuizResult, StudentAnswer
+from .serializers import CustomUserSerializer, StudentSerializer, GradeSerializer, SubjectSerializer, TopicSerializer, QuestionSerializer, QuizSerializer, AnswerSerializer, StudentQuizResultSerializer 
 from rest_framework import viewsets
 
 # Register user
@@ -112,6 +112,7 @@ class SubjectViewSet(viewsets.ModelViewSet):
             'topic_count': topics.count(),
             'topics': serializer.data
         })
+    
 
 class TopicViewSet(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
@@ -156,6 +157,113 @@ class QuizViewSet(viewsets.ModelViewSet):
             'question_count': questions.count(),
             'questions': serializer.data
         })
+    
+    @action(detail=False, methods=['get'], url_path='attempts')
+    def get_attempts(self, request):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        student = request.user
+        attempted_quizzes = StudentQuizResult.objects.filter(student=student)
+
+        attempts_data = []
+        for attempt in attempted_quizzes:
+            result_serializer = StudentQuizResultSerializer(attempt)
+            quiz = Quiz.objects.get(id=attempt.quiz_id)
+            serializer = QuizSerializer(quiz)
+            data = {
+                "attempt_info": result_serializer.data,
+                "quiz_info": serializer.data
+            }
+            attempts_data.append(data)
+        return Response(attempts_data, status=status.HTTP_200_OK)
+    
+    @action(detail=True, methods=['post'], url_path='submit')
+    def submit_quiz(self, request, pk=None):
+        try:
+            quiz = self.get_object()
+        except Quiz.DoesNotExist:
+            return Response({'error': 'Quiz not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+        student = request.user
+        answers = request.data.get('answers', {})
+
+        if StudentQuizResult.objects.filter(student=student, quiz=quiz).exists():
+            return Response({'error': 'You have already attempted this quiz.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        correct_answers = 0
+        total_questions = quiz.question_set.count()
+        student_answers = []
+
+        for question in quiz.question_set.all():
+            user_answer_id = answers.get(str(question.id))
+            if user_answer_id:
+                try:
+                    user_answer = question.answer_set.get(id=user_answer_id)
+                    is_correct = user_answer.is_correct
+                    if is_correct:
+                        correct_answers += 1
+                    student_answers.append(StudentAnswer(
+                        student=student,
+                        question=question,
+                        selected_answer=user_answer,
+                        is_correct=is_correct
+                    ))
+                except Answer.DoesNotExist:
+                    continue
+
+        score = (correct_answers / total_questions) * 100
+
+        StudentQuizResult.objects.create(
+            student=student,
+            quiz=quiz,
+            correct_answers=correct_answers,
+            total_questions=total_questions,
+            score=score
+        )
+
+        StudentAnswer.objects.bulk_create(student_answers)
+
+        return Response({
+            'total_questions': total_questions,
+            'correct_answers': correct_answers,
+            'score': score,
+        }, status=status.HTTP_200_OK)
+    
+    @action(detail=True, methods=['get'], url_path='review')
+    def review_quiz(self, request, pk=None):
+        try:
+            quiz = Quiz.objects.get(pk=pk)
+        except Quiz.DoesNotExist:
+            return Response({'error': 'Quiz not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        student = request.user
+        student_answers = StudentAnswer.objects.filter(
+            student=student, question__quiz=quiz)
+
+        serialized_answers = []
+        for answer in student_answers:
+            correct_answer = answer.question.answer_set.filter(
+                is_correct=True).first().content
+            serialized_answer = {
+                'question': answer.question.content,
+                'selected_answer': answer.selected_answer.content if answer.selected_answer else None,
+                'correct_answer': correct_answer,
+                'is_correct': answer.selected_answer.content == correct_answer if answer.selected_answer else False
+            }
+            serialized_answers.append(serialized_answer)
+
+        return Response({
+            'quiz': quiz.id,
+            'topic': quiz.topic.title,
+            'grade': quiz.topic.subject.grade.id,
+            'subject': quiz.topic.subject.title,
+            'answers': serialized_answers
+        }, status=status.HTTP_200_OK)
 
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()

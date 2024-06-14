@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Student, Grade, Subject, Topic, Quiz, Question, Answer
+from .models import CustomUser, Student, Grade, Subject, Topic, Quiz, Question, Answer, StudentQuizResult
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -72,4 +72,10 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ['id', 'quiz', 'content', 'answers']
+
+
+class StudentQuizResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentQuizResult
+        fields = '__all__'
 

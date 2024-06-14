@@ -18,6 +18,8 @@ import Dashboard from "./screens/admin/Dashboard";
 import ClassesScreen from "./screens/admin/ClassesScreen";
 import ProfileScreen from "./screens/admin/ProfileScreen";
 import { useSelector } from "react-redux";
+import AttemptScreen from "./screens/AttemptScreen";
+import QuizReviewScreen from "./screens/QuizReviewScreen";
 
 const ProtectedLayout = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -52,6 +54,12 @@ function App() {
             path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes/:quizId'
             element={<QuizScreen />}
           />
+          <Route
+            path='/grade/:gradeId/subjects/:subjectId/topics/:topicId/quizes/:quizId/review'
+            element={<QuizScreen />}
+          />
+          <Route path='/quizzes/my-attempts' element={<AttemptScreen />} />
+          <Route path='/quizzes/:quizId/review' element={<QuizReviewScreen />} />
         </Route>
         <Route path='/subjects' element={<SubjectScreen />} />
         <Route path='/student/:sbj' element={<Topic />} />
